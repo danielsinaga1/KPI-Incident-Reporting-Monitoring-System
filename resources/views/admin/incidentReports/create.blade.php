@@ -74,6 +74,20 @@
                                 {{ trans('cruds.incidentReport.fields.pencegahan_helper') }}
                             </p>
                         </div>
+
+                        <div class="form-group {{ $errors->has('dept_designated_id') ? 'has-error' : '' }}">
+                            <label for="dept_designation">{{ trans('cruds.incidentReport.fields.dept_designation') }}*</label>
+                            <select name="dept_designated_id" id="dept_designation" class="form-control select2" required>
+                                @foreach($dept_designations as $id => $dept_designation)
+                                    <option value="{{ $id }}" {{ (isset($incidentReport) && $incidentReport->dept_designation ? $incidentReport->dept_designation->id : old('dept_designated_id')) == $id ? 'selected' : '' }}>{{ $dept_designation }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('dept_designated_id'))
+                                <p class="help-block">
+                                    {{ $errors->first('dept_designated_id') }}
+                                </p>
+                            @endif
+                        </div>
                         <div>
                             <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
                         </div>

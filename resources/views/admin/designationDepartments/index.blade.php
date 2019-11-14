@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('content')
 <div class="content">
-    @can('department_address_to_create')
+    @can('designation_department_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route("admin.department-address-tos.create") }}">
-                    {{ trans('global.add') }} {{ trans('cruds.departmentAddressTo.title_singular') }}
+                <a class="btn btn-success" href="{{ route("admin.designation-departments.create") }}">
+                    {{ trans('global.add') }} {{ trans('cruds.dept_designation.title_singular') }}
                 </a>
             </div>
         </div>
@@ -15,24 +15,24 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ trans('cruds.departmentAddressTo.title_singular') }} {{ trans('global.list') }}
+                    {{ trans('cruds.dept_designation.title_singular') }} {{ trans('global.list') }}
                 </div>
                 <div class="panel-body">
 
-                    <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-DepartmentAddressTo">
+                    <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-DesignationDepartment">
                         <thead>
                             <tr>
                                 <th width="10">
 
                                 </th>
                                 <th>
-                                    {{ trans('cruds.departmentAddressTo.fields.id') }}
+                                    {{ trans('cruds.dept_designation.fields.id') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.departmentAddressTo.fields.cc_code') }}
+                                    {{ trans('cruds.dept_designation.fields.cc_code') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.departmentAddressTo.fields.dept_name_address') }}
+                                    {{ trans('cruds.dept_designation.fields.name') }}
                                 </th>
                                 <th>
                                     &nbsp;
@@ -54,11 +54,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('department_address_to_delete')
+@can('designation_department_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.department-address-tos.massDestroy') }}",
+    url: "{{ route('admin.designation-departments.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
@@ -90,18 +90,18 @@
     serverSide: true,
     retrieve: true,
     aaSorting: [],
-    ajax: "{{ route('admin.department-address-tos.index') }}",
+    ajax: "{{ route('admin.designation-departments.index') }}",
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
 { data: 'cc_code', name: 'cc_code' },
-{ data: 'dept_name_address', name: 'dept_name_address' },
+{ data: 'name', name: 'name' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'asc' ]],
     pageLength: 100,
   };
-  $('.datatable-DepartmentAddressTo').DataTable(dtOverrideGlobals);
+  $('.datatable-DesignationDepartment').DataTable(dtOverrideGlobals);
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
         $($.fn.dataTable.tables(true)).DataTable()
             .columns.adjust();

@@ -7,6 +7,7 @@ use App\Http\Requests\MassDestroyIncidentReportRequest;
 use App\Http\Requests\StoreIncidentReportRequest;
 use App\Http\Requests\UpdateIncidentReportRequest;
 use App\IncidentReport;
+use App\DesignationDepartment;
 use App\RootCause;
 use Gate;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class IncidentReportsController extends Controller
     {
 
         if ($request->ajax()) {
-            $query = IncidentReport::with(['nama_pelapor', 'dept_origin', 'root_cause', 'dept_addressed_to', 'reviewed_by', 'acknowledge_by', 'team']);
+            $query = IncidentReport::with(['nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'reviewed_by', 'acknowledge_by', 'team']);
             $table = Datatables::of($query);
             $table->addColumn('placeholder', '&nbsp;');
             $table->addColumn('actions', '&nbsp;');
@@ -71,8 +72,8 @@ class IncidentReportsController extends Controller
                 return $row->pencegahan ? $row->pencegahan : "";
             });
 
-            $table->addColumn('dept_addressed_to_dept_name_address', function ($row) {
-                return $row->dept_addressed_to ? $row->dept_addressed_to->dept_name_address : '';
+            $table->addColumn('dept_designation_name', function ($row) {
+                return $row->dept_designation ? $row->dept_designation->name : '';
             });
 
             $table->addColumn('reviewed_by_name', function ($row) {
@@ -87,7 +88,7 @@ class IncidentReportsController extends Controller
                 return $row->result ? $row->result->name : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'nama_pelapor', 'dept_origin', 'root_cause', 'dept_addressed_to', 'reviewed_by', 'acknowledge_by','result']);
+            $table->rawColumns(['actions', 'placeholder', 'nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'reviewed_by', 'acknowledge_by','result']);
             return $table->make(true);
             
         }
@@ -98,10 +99,11 @@ class IncidentReportsController extends Controller
     public function create()
     {
         abort_if(Gate::denies('incident_report_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
+        
+        $dept_designations = DesignationDepartment::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
         $root_causes = RootCause::all()->pluck('root_cause', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.incidentReports.create', compact('root_causes'));
+        return view('admin.incidentReports.create', compact('root_causes','dept_designations'));
     }
 
     public function store(StoreIncidentReportRequest $request)
@@ -123,9 +125,11 @@ class IncidentReportsController extends Controller
     {
         abort_if(Gate::denies('incident_report_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $dept_designations = DesignationDepartment::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        
         $root_causes = RootCause::all()->pluck('root_cause', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $incidentReport->load('nama_pelapor', 'dept_origin', 'root_cause', 'dept_addressed_to', 'reviewed_by', 'acknowledge_by', 'team');
+        $incidentReport->load('nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'reviewed_by', 'acknowledge_by', 'team');
 
         return view('admin.incidentReports.edit', compact('root_causes', 'incidentReport'));
     }
@@ -141,7 +145,7 @@ class IncidentReportsController extends Controller
     {
         abort_if(Gate::denies('incident_report_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $incidentReport->load('nama_pelapor', 'dept_origin', 'root_cause', 'dept_addressed_to', 'reviewed_by', 'acknowledge_by', 'team');
+        $incidentReport->load('nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'reviewed_by', 'acknowledge_by', 'team');
 
         return view('admin.incidentReports.show', compact('incidentReport'));
     }

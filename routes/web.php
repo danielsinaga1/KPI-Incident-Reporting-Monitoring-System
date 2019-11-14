@@ -65,7 +65,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('root-causes/destroy', 'RootCauseController@massDestroy')->name('root-causes.massDestroy');
     Route::resource('root-causes', 'RootCauseController');
 
-    // Department Address Tos
-    Route::delete('department-address-tos/destroy', 'DepartmentAddressToController@massDestroy')->name('department-address-tos.massDestroy');
-    Route::resource('department-address-tos', 'DepartmentAddressToController');
+    // Designation Departments
+    Route::delete('designation-departments/destroy', 'DesignationDepartmentController@massDestroy')->name('designation-departments.massDestroy');
+    Route::resource('designation-departments', 'DesignationDepartmentController');
 });

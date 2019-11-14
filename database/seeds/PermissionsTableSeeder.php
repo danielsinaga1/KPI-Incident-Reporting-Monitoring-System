@@ -246,23 +246,23 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => '60',
-                'title' => 'department_address_to_create',
+                'title' => 'designation_department_create',
             ],
             [
                 'id'    => '61',
-                'title' => 'department_address_to_edit',
+                'title' => 'designation_department_edit',
             ],
             [
                 'id'    => '62',
-                'title' => 'department_address_to_show',
+                'title' => 'designation_department_show',
             ],
             [
                 'id'    => '63',
-                'title' => 'department_address_to_delete',
+                'title' => 'designation_department_delete',
             ],
             [
                 'id'    => '64',
-                'title' => 'department_address_to_access',
+                'title' => 'designation_department_access',
             ],
         ];
 

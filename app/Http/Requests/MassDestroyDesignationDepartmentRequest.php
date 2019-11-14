@@ -2,16 +2,16 @@
 
 namespace App\Http\Requests;
 
-use App\DepartmentAddressTo;
+use App\DesignationDepartment;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
 
-class MassDestroyDepartmentAddressToRequest extends FormRequest
+class MassDestroyDesignationDepartmentRequest extends FormRequest
 {
     public function authorize()
     {
-        abort_if(Gate::denies('department_address_to_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('designation_department_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return true;
     }
@@ -20,7 +20,7 @@ class MassDestroyDepartmentAddressToRequest extends FormRequest
     {
         return [
             'ids'   => 'required|array',
-            'ids.*' => 'exists:department_address_tos,id',
+            'ids.*' => 'exists:dept_designations,id',
         ];
     }
 }

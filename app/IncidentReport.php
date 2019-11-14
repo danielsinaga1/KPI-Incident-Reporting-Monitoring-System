@@ -36,7 +36,7 @@ class IncidentReport extends Model
         'nama_pelapor_id',
         'date_dept_action',
         'acknowledge_by_id',
-        'dept_addressed_to_id',
+        'dept_designated_id',
     ];
 
     public function nama_pelapor()
@@ -74,9 +74,9 @@ class IncidentReport extends Model
         $this->attributes['date_dept_action'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
     }
 
-    public function dept_addressed_to()
+    public function dept_designation()
     {
-        return $this->belongsTo(DepartmentAddressTo::class, 'dept_addressed_to_id');
+        return $this->belongsTo(DesignationDepartment::class, 'dept_designated_id');
     }
 
     public function reviewed_by()

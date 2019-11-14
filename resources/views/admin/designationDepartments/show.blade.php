@@ -7,7 +7,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ trans('global.show') }} {{ trans('cruds.departmentAddressTo.title') }}
+                    {{ trans('global.show') }} {{ trans('cruds.dept_designation.title') }}
                 </div>
                 <div class="panel-body">
 
@@ -16,26 +16,26 @@
                             <tbody>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.departmentAddressTo.fields.id') }}
+                                        {{ trans('cruds.dept_designation.fields.id') }}
                                     </th>
                                     <td>
-                                        {{ $departmentAddressTo->id }}
+                                        {{ $designationDepartment->id }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.departmentAddressTo.fields.cc_code') }}
+                                        {{ trans('cruds.dept_designation.fields.cc_code') }}
                                     </th>
                                     <td>
-                                        {{ $departmentAddressTo->cc_code }}
+                                        {{ $designationDepartment->cc_code }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.departmentAddressTo.fields.dept_name_address') }}
+                                        {{ trans('cruds.dept_designation.fields.name') }}
                                     </th>
                                     <td>
-                                        {{ $departmentAddressTo->dept_name_address }}
+                                        {{ $designationDepartment->name }}
                                     </td>
                                 </tr>
                             </tbody>

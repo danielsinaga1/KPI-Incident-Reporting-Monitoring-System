@@ -102,13 +102,13 @@
                                 </a>
                             </li>
                         @endcan
-                        @can('department_address_to_access')
-                            <li class="{{ request()->is('admin/department-address-tos') || request()->is('admin/department-address-tos/*') ? 'active' : '' }}">
-                                <a href="{{ route("admin.department-address-tos.index") }}">
+                        @can('designation_department_access')
+                            <li class="{{ request()->is('admin/designation-departments') || request()->is('admin/department-address-tos/*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.designation-departments.index") }}">
                                     <i class="fa-fw fas fa-male">
 
                                     </i>
-                                    <span>{{ trans('cruds.departmentAddressTo.title') }}</span>
+                                    <span>{{ trans('cruds.dept_designation.title') }}</span>
                                 </a>
                             </li>
                         @endcan

@@ -2,16 +2,16 @@
 
 namespace App\Http\Requests;
 
-use App\DepartmentAddressTo;
+use App\DesignationDepartment;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
 
-class UpdateDepartmentAddressToRequest extends FormRequest
+class UpdateDesignationDepartmentRequest extends FormRequest
 {
     public function authorize()
     {
-        abort_if(Gate::denies('department_address_to_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('designation_department_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return true;
     }
@@ -22,7 +22,7 @@ class UpdateDepartmentAddressToRequest extends FormRequest
             'cc_code'           => [
                 'required',
             ],
-            'dept_name_address' => [
+            'name' => [
                 'required',
             ],
         ];

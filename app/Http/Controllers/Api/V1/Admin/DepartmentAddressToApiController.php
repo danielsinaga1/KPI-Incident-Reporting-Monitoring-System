@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\DepartmentAddressTo;
+use App\DesignationDepartment;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreDepartmentAddressToRequest;
-use App\Http\Requests\UpdateDepartmentAddressToRequest;
-use App\Http\Resources\Admin\DepartmentAddressToResource;
+use App\Http\Requests\StoreDesignationDepartmentRequest;
+use App\Http\Requests\UpdateDesignationDepartmentRequest;
+use App\Http\Resources\Admin\DesignationDepartmentResource;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class DepartmentAddressToApiController extends Controller
+class DesignationDepartmentApiController extends Controller
 {
     public function index()
     {

@@ -56,7 +56,7 @@
                                     {{ trans('cruds.incidentReport.fields.date_dept_action') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.dept_addressed_to') }}
+                                    {{ trans('cruds.incidentReport.fields.dept_designation') }}
                                 </th>
                                 <th>
                                     {{ trans('cruds.incidentReport.fields.reviewed_by') }}
@@ -131,7 +131,7 @@
       { data: 'pencegahan', name: 'pencegahan' },
       { data: 'result_name', name: 'result.name' },
       { data: 'date_dept_action', name: 'date_dept_action' },
-      { data: 'dept_addressed_to_dept_name_address', name: 'dept_addressed_to.dept_name_address' },
+      { data: 'dept_designation_name', name: 'dept_designation.name' },
       { data: 'reviewed_by_name', name: 'reviewed_by.name' },
       { data: 'acknowledge_by_name', name: 'acknowledge_by.name' },
       { data: 'actions', name: '{{ trans('global.actions') }}' }

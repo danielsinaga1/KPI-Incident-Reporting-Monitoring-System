@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class DepartmentAddressTo extends Model
+class DesignationDepartment extends Model
 {
     use SoftDeletes;
 
-    public $table = 'department_address_tos';
+    public $table = 'dept_designations';
 
     protected $dates = [
         'created_at',
@@ -22,11 +22,11 @@ class DepartmentAddressTo extends Model
         'created_at',
         'updated_at',
         'deleted_at',
-        'dept_name_address',
+        'name',
     ];
 
     public function incidentReports()
     {
-        return $this->hasMany(IncidentReport::class, 'dept_addressed_to_id', 'id');
+        return $this->hasMany(IncidentReport::class, 'dept_designated_id', 'id');
     }
 }
