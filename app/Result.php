@@ -2,15 +2,14 @@
 
 namespace App;
 
-use App\Traits\MultiTenantModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CategoryIncident extends Model
+class Result extends Model
 {
     use SoftDeletes;
 
-    public $table = 'category_incidents';
+    public $table = 'results';
 
     protected $dates = [
         'created_at',
@@ -20,17 +19,14 @@ class CategoryIncident extends Model
 
     protected $fillable = [
         'name',
-        'code',
-        'type',
-        'team_id',
         'created_at',
         'updated_at',
         'deleted_at',
-        'description',
     ];
 
-    public function team()
+
+    public function incidentReports()
     {
-        return $this->belongsTo(Team::class, 'team_id');
+        return $this->hasMany(IncidentReport::class, 'result_id', 'id');
     }
 }

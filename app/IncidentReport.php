@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class IncidentReport extends Model
 {
-    use SoftDeletes, MultiTenantModelTrait;
+    use SoftDeletes;
 
     public $table = 'incident_reports';
 
@@ -31,7 +31,7 @@ class IncidentReport extends Model
         'deleted_at',
         'date_incident',
         'root_cause_id',
-        'dept_origin_id',
+        'result_id',
         'reviewed_by_id',
         'nama_pelapor_id',
         'date_dept_action',
@@ -92,5 +92,10 @@ class IncidentReport extends Model
     public function team()
     {
         return $this->belongsTo(Team::class, 'team_id');
+    }
+
+    public function result()
+    {
+        return $this->belongsTo(Result::class, 'result_id');
     }
 }

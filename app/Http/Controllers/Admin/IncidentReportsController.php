@@ -83,7 +83,11 @@ class IncidentReportsController extends Controller
                 return $row->acknowledge_by ? $row->acknowledge_by->name : '';
             });
             
-            $table->rawColumns(['actions', 'placeholder', 'nama_pelapor', 'dept_origin', 'root_cause', 'dept_addressed_to', 'reviewed_by', 'acknowledge_by']);
+            $table->addColumn('result_name', function ($row) {
+                return $row->result ? $row->result->name : '';
+            });
+
+            $table->rawColumns(['actions', 'placeholder', 'nama_pelapor', 'dept_origin', 'root_cause', 'dept_addressed_to', 'reviewed_by', 'acknowledge_by','result']);
             return $table->make(true);
             
         }
@@ -107,6 +111,7 @@ class IncidentReportsController extends Controller
         // $data['nama_pelapor_id'] = Auth::id();
         $data['nama_pelapor_id'] = auth()->id();   
         $data['team_id'] = Auth::user()->team_id;
+        $data['result_id'] = 1;
         // dd($data);
 
         $incidentReport = IncidentReport::create($data);

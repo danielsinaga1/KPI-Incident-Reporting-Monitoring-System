@@ -21,10 +21,6 @@ class AddRelationshipFieldsToIncidentReportsTable extends Migration
 
             $table->foreign('acknowledge_by_id', 'acknowledge_by_fk_566296')->references('id')->on('users');
 
-            $table->unsignedInteger('dept_origin_id')->nullable();
-
-            $table->foreign('dept_origin_id', 'dept_origin_fk_576000')->references('id')->on('teams');
-
             $table->unsignedInteger('dept_addressed_to_id')->nullable();
 
             $table->foreign('dept_addressed_to_id', 'dept_addressed_to_fk_576010')->references('id')->on('department_address_tos');
@@ -36,6 +32,7 @@ class AddRelationshipFieldsToIncidentReportsTable extends Migration
             $table->unsignedInteger('root_cause_id');
 
             $table->foreign('root_cause_id', 'root_cause_fk_576581')->references('id')->on('root_causes');
+
         });
     }
 }

@@ -50,6 +50,9 @@
                                     {{ trans('cruds.incidentReport.fields.pencegahan') }}
                                 </th>
                                 <th>
+                                    {{ trans('cruds.incidentReport.fields.result') }}
+                                </th>
+                                <th>
                                     {{ trans('cruds.incidentReport.fields.date_dept_action') }}
                                 </th>
                                 <th>
@@ -126,11 +129,12 @@
       { data: 'root_cause_root_cause', name: 'root_cause.root_cause' },
       { data: 'perbaikan', name: 'perbaikan' },
       { data: 'pencegahan', name: 'pencegahan' },
+      { data: 'result_name', name: 'result.name' },
       { data: 'date_dept_action', name: 'date_dept_action' },
-{ data: 'dept_addressed_to_dept_name_address', name: 'dept_addressed_to.dept_name_address' },
-{ data: 'reviewed_by_name', name: 'reviewed_by.name' },
-{ data: 'acknowledge_by_name', name: 'acknowledge_by.name' },
-{ data: 'actions', name: '{{ trans('global.actions') }}' }
+      { data: 'dept_addressed_to_dept_name_address', name: 'dept_addressed_to.dept_name_address' },
+      { data: 'reviewed_by_name', name: 'reviewed_by.name' },
+      { data: 'acknowledge_by_name', name: 'acknowledge_by.name' },
+      { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'asc' ]],
     pageLength: 100,

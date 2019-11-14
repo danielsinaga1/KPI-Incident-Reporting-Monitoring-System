@@ -83,6 +83,8 @@ return [
             'perbaikan_helper'         => '',
             'pencegahan'               => 'Pencegahan',
             'pencegahan_helper'        => '',
+            'result'                   => 'Result',
+            'result_helper'            => '',
             'dept_action'              => 'Tindakan Oleh',
             'dept_action_helper'       => '',
             'reviewed_by'              => 'Reviewed By',
@@ -287,6 +289,23 @@ return [
             'updated_at_helper'        => '',
             'deleted_at'               => 'Deleted at',
             'deleted_at_helper'        => '',
+        ],
+    ],
+
+    'result'                  => [
+        'title'          => 'Results',
+        'title_singular' => 'Result',
+        'fields'         => [
+            'id'                => 'ID',
+            'id_helper'         => '',
+            'name'              => 'Name',
+            'name_helper'       => '',
+            'created_at'        => 'Created at',
+            'created_at_helper' => '',
+            'updated_at'        => 'Updated At',
+            'updated_at_helper' => '',
+            'deleted_at'        => 'Deleted At',
+            'deleted_at_helper' => '',
         ],
     ],
 ];

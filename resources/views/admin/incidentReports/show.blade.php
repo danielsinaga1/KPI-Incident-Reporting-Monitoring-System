@@ -80,6 +80,14 @@
                                 </tr>
                                 <tr>
                                     <th>
+                                        {{ trans('cruds.incidentReport.fields.result') }}
+                                    </th>
+                                    <td>
+                                        {{ $incidentReport->result->name ?? '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
                                         {{ trans('cruds.incidentReport.fields.date_dept_action') }}
                                     </th>
                                     <td>

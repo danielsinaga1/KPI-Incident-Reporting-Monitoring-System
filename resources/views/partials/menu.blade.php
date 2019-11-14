@@ -112,6 +112,16 @@
                                 </a>
                             </li>
                         @endcan
+                            @can('result_access')
+                            <li class="{{ request()->is('admin/results') || request()->is('admin/results/*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.results.index") }}">
+                                    <i class="fa-fw fas fa-male">
+
+                                    </i>
+                                    <span>{{ trans('cruds.result.title') }}</span>
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </li>
             @endcan

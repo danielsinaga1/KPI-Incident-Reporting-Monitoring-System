@@ -56,6 +56,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Teams
     Route::delete('teams/destroy', 'TeamController@massDestroy')->name('teams.massDestroy');
     Route::resource('teams', 'TeamController');
+    
+    // Results
+    Route::delete('results/destroy', 'ResultController@massDestroy')->name('results.massDestroy');
+    Route::resource('results', 'ResultController');
 
     // Root Causes
     Route::delete('root-causes/destroy', 'RootCauseController@massDestroy')->name('root-causes.massDestroy');
