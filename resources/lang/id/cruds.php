@@ -271,16 +271,16 @@ return [
             'deleted_at_helper' => '',
         ],
     ],
-    'departmentAddressTo'   => [
-        'title'          => 'Department Addressed To',
-        'title_singular' => 'Department Addressed To',
+    'dept_designation'   => [
+        'title'          => 'Department Designation',
+        'title_singular' => 'Department Designation',
         'fields'         => [
             'id'                       => 'ID',
             'id_helper'                => '',
             'cc_code'                  => 'Cost Center',
             'cc_code_helper'           => '',
-            'dept_name_address'        => 'Department Name',
-            'dept_name_address_helper' => '',
+            'name'                     => 'Department Name',
+            'name_helper'              => '',
             'created_at'               => 'Created at',
             'created_at_helper'        => '',
             'updated_at'               => 'Updated at',

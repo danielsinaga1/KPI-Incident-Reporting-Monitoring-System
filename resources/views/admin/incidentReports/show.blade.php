@@ -96,10 +96,10 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.incidentReport.fields.dept_addressed_to') }}
+                                        {{ trans('cruds.incidentReport.fields.dept_designation') }}
                                     </th>
                                     <td>
-                                        {{ $incidentReport->dept_addressed_to->dept_name_address ?? '' }}
+                                        {{ $incidentReport->dept_designation->name   ?? '' }}
                                     </td>
                                 </tr>
                                 <tr>

@@ -35,6 +35,6 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Root Causes
     Route::apiResource('root-causes', 'RootCauseApiController');
 
-    // Department Address Tos
-    Route::apiResource('department-address-tos', 'DepartmentAddressToApiController');
+    // Designation Department
+    Route::apiResource('designation-departments', 'DesignationDepartmentApiController');
 });

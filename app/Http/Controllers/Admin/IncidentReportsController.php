@@ -118,6 +118,11 @@ class IncidentReportsController extends Controller
 
         $incidentReport = IncidentReport::create($data);
 
+        //ditest
+        if($request == $data['team_id'] ){
+            $incidentReport->assignToTeam($request['team_id']);                
+        }
+
         return redirect()->route('admin.incident-reports.index');
     }
 

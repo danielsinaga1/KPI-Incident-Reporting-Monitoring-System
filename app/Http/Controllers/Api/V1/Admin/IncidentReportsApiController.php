@@ -17,7 +17,7 @@ class IncidentReportsApiController extends Controller
     {
         abort_if(Gate::denies('incident_report_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new IncidentReportResource(IncidentReport::with(['nama_pelapor', 'dept_origin', 'root_cause', 'dept_addressed_to', 'reviewed_by', 'acknowledge_by', 'team'])->get());
+        return new IncidentReportResource(IncidentReport::with(['nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'reviewed_by', 'acknowledge_by', 'team'])->get());
     }
 
     public function store(StoreIncidentReportRequest $request)
@@ -33,7 +33,7 @@ class IncidentReportsApiController extends Controller
     {
         abort_if(Gate::denies('incident_report_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new IncidentReportResource($incidentReport->load(['nama_pelapor', 'dept_origin', 'root_cause', 'dept_addressed_to', 'reviewed_by', 'acknowledge_by', 'team']));
+        return new IncidentReportResource($incidentReport->load(['nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'reviewed_by', 'acknowledge_by', 'team']));
     }
 
     public function update(UpdateIncidentReportRequest $request, IncidentReport $incidentReport)

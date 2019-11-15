@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "58b9327777173b38e89667afe1c5c147",
+    "content-hash": "5be02623cab4faa3a74e9749a8fe2ebd",
     "packages": [
         {
             "name": "bugsnag/bugsnag",
@@ -4948,6 +4948,42 @@
                 "laravel-dump-server"
             ],
             "time": "2019-08-11T13:17:40+00:00"
+        },
+        {
+            "name": "cedextech/trait-generator",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cedextech/trait-generator.git",
+                "reference": "6b864c05583d6007e2b768a35d053a3b3772be05"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cedextech/trait-generator/zipball/6b864c05583d6007e2b768a35d053a3b3772be05",
+                "reference": "6b864c05583d6007e2b768a35d053a3b3772be05",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Cedextech\\TraitGenerator": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kiran K",
+                    "email": "kiran@cedextech.com"
+                }
+            ],
+            "description": "A Laravel Generator For Creating New Traits",
+            "time": "2017-10-15T20:57:24+00:00"
         },
         {
             "name": "doctrine/instantiator",

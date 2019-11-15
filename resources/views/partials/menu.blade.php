@@ -103,7 +103,7 @@
                             </li>
                         @endcan
                         @can('designation_department_access')
-                            <li class="{{ request()->is('admin/designation-departments') || request()->is('admin/department-address-tos/*') ? 'active' : '' }}">
+                            <li class="{{ request()->is('admin/designation-departments') || request()->is('admin/designation-departments/*') ? 'active' : '' }}">
                                 <a href="{{ route("admin.designation-departments.index") }}">
                                     <i class="fa-fw fas fa-male">
 
