@@ -7,7 +7,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ trans('global.show') }} {{ trans('cruds.team.title') }}
+                    {{ trans('global.show') }} {{ trans('cruds.department.title') }}
                 </div>
                 <div class="panel-body">
 
@@ -16,7 +16,7 @@
                             <tbody>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.team.fields.id') }}
+                                        {{ trans('cruds.department.fields.id') }}
                                     </th>
                                     <td>
                                         {{ $team->id }}
@@ -24,7 +24,7 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.team.fields.cc_code') }}
+                                        {{ trans('cruds.department.fields.cc_code') }}
                                     </th>
                                     <td>
                                         {{ $team->cc_code }}
@@ -32,7 +32,7 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.team.fields.name') }}
+                                        {{ trans('cruds.department.fields.name') }}
                                     </th>
                                     <td>
                                         {{ $team->name }}

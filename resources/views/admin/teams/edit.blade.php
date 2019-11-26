@@ -7,7 +7,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ trans('global.edit') }} {{ trans('cruds.team.title_singular') }}
+                    {{ trans('global.edit') }} {{ trans('cruds.department.title_singular') }}
                 </div>
                 <div class="panel-body">
 
@@ -15,7 +15,7 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group {{ $errors->has('cc_code') ? 'has-error' : '' }}">
-                            <label for="cc_code">{{ trans('cruds.team.fields.cc_code') }}*</label>
+                            <label for="cc_code">{{ trans('cruds.department.fields.cc_code') }}*</label>
                             <input type="text" id="cc_code" name="cc_code" class="form-control" value="{{ old('cc_code', isset($team) ? $team->cc_code : '') }}" required>
                             @if($errors->has('cc_code'))
                                 <p class="help-block">
@@ -23,11 +23,11 @@
                                 </p>
                             @endif
                             <p class="helper-block">
-                                {{ trans('cruds.team.fields.cc_code_helper') }}
+                                {{ trans('cruds.department.fields.cc_code_helper') }}
                             </p>
                         </div>
                         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                            <label for="name">{{ trans('cruds.team.fields.name') }}*</label>
+                            <label for="name">{{ trans('cruds.department.fields.name') }}*</label>
                             <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($team) ? $team->name : '') }}" required>
                             @if($errors->has('name'))
                                 <p class="help-block">
@@ -35,7 +35,7 @@
                                 </p>
                             @endif
                             <p class="helper-block">
-                                {{ trans('cruds.team.fields.name_helper') }}
+                                {{ trans('cruds.department.fields.name_helper') }}
                             </p>
                         </div>
                         <div>

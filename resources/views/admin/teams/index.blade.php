@@ -5,7 +5,7 @@
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
                 <a class="btn btn-success" href="{{ route("admin.teams.create") }}">
-                    {{ trans('global.add') }} {{ trans('cruds.team.title_singular') }}
+                    {{ trans('global.add') }} {{ trans('cruds.department.title_singular') }}
                 </a>
             </div>
         </div>
@@ -15,7 +15,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ trans('cruds.team.title_singular') }} {{ trans('global.list') }}
+                    {{ trans('cruds.department.title_singular') }} {{ trans('global.list') }}
                 </div>
                 <div class="panel-body">
 
@@ -27,13 +27,13 @@
 
                                     </th>
                                     <th>
-                                        {{ trans('cruds.team.fields.id') }}
+                                        {{ trans('cruds.department.fields.id') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.team.fields.cc_code') }}
+                                        {{ trans('cruds.department.fields.cc_code') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.team.fields.name') }}
+                                        {{ trans('cruds.department.fields.name') }}
                                     </th>
                                     <th>
                                         &nbsp;

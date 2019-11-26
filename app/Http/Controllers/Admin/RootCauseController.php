@@ -32,8 +32,8 @@ class RootCauseController extends Controller
     public function store(StoreRootCauseRequest $request)
     {
         $rootCause = RootCause::create($request->all());
-
-        return redirect()->route('admin.root-causes.index');
+         
+        return redirect()->route('admin.root-causes.index')->with(['success' => 'Root cause successfully added! ']);
     }
 
     public function edit(RootCause $rootCause)

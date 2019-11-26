@@ -115,11 +115,12 @@ class IncidentReportsController extends Controller
         $data['team_id'] = Auth::user()->team_id;
         $data['result_id'] = 1;
         // dd($data);
+        
 
         $incidentReport = IncidentReport::create($data);
 
         //ditest
-        if($request == $data['team_id'] ){
+        if(! $data['team_id'] = $user->team->id){
             $incidentReport->assignToTeam($request['team_id']);                
         }
 

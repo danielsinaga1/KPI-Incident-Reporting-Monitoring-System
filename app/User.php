@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use App\Role;
+use App\UserRole;
 
 class User extends Authenticatable
 {
@@ -87,4 +89,41 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Team::class, 'team_id');
     }
+    
+    public function isManager(){
+        $userId = Auth::user()->id();
+        $UserRole = UserRole::where('user_id',$userId)->first();
+        if($UserRole->roles->id == 6){
+            return true;
+        }
+        return false;
+    }
+
+    public function isSupervisor(){
+        $userId = Auth::user()->id();
+        $UserRole = UserRole::where('user_id',$userId)->first();
+        if($UserRole->roles->id == 4){
+            return true;
+        }
+        return false;
+    }
+
+    public function isSuperintendent(){
+        $userId = Auth::user()->id();
+        $UserRole = UserRole::where('user_id',$userId)->first();
+        if($UserRole->roles->id == 5){
+            return true;
+        }
+        return false;
+    }
+
+    public function isGeneralManager(){
+        $userId = Auth::user()->id();
+        $UserRole = UserRole::where('user_id',$userId)->first();
+        if($UserRole->roles->id == 7){
+            return true;
+        }
+        return false;
+    }
+    
 }
