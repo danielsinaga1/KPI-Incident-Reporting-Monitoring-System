@@ -50,24 +50,19 @@
                                 {{ trans('cruds.user.fields.password_helper') }}
                             </p>
                         </div>
-                        <div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
-                            <label for="roles">{{ trans('cruds.user.fields.roles') }}*
-                                <span class="btn btn-info btn-xs select-all">{{ trans('global.select_all') }}</span>
-                                <span class="btn btn-info btn-xs deselect-all">{{ trans('global.deselect_all') }}</span></label>
-                            <select name="roles[]" id="roles" class="form-control select2" multiple="multiple" required>
-                                @foreach($roles as $id => $roles)
-                                    <option value="{{ $id }}" {{ (in_array($id, old('roles', [])) || isset($user) && $user->roles->contains($id)) ? 'selected' : '' }}>{{ $roles }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('roles'))
-                                <p class="help-block">
-                                    {{ $errors->first('roles') }}
-                                </p>
-                            @endif
-                            <p class="helper-block">
-                                {{ trans('cruds.user.fields.roles_helper') }}
-                            </p>
-                        </div>
+                        <div class="form-group {{ $errors->has('role_id') ? 'has-error' : '' }}">
+                                <label for="role">{{ trans('cruds.user.fields.role') }}</label>
+                                <select name="role_id" id="role" class="form-control select2">
+                                    @foreach($roles as $id => $role)
+                                        <option value="{{ $id }}" {{ (isset($user) && $user->role ? $user->role->id : old('role_id')) == $id ? 'selected' : '' }}>{{ $role }}</option>
+                                    @endforeach
+                                </select>
+                                @if($errors->has('role_id'))
+                                    <p class="help-block">
+                                        {{ $errors->first('role_id') }}
+                                    </p>
+                                @endif
+                            </div>
                         <div class="form-group {{ $errors->has('team_id') ? 'has-error' : '' }}">
                             <label for="team">{{ trans('cruds.user.fields.department') }}</label>
                             <select name="team_id" id="team" class="form-control select2">

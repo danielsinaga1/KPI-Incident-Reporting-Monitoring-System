@@ -14,13 +14,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 use Yajra\DataTables\Facades\DataTables;
-class IncidentReportsController extends Controller
+class IncidentReportController extends Controller
 {
     public function index(Request $request)
     {
 
         if ($request->ajax()) {
-            $query = IncidentReport::with(['nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'reviewed_by', 'acknowledge_by', 'team']);
+            $query = IncidentReport::with(['nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'action_by', 'reviewed_by', 'acknowledge_by', 'team']);
             $table = Datatables::of($query);
             $table->addColumn('placeholder', '&nbsp;');
             $table->addColumn('actions', '&nbsp;');
@@ -46,6 +46,10 @@ class IncidentReportsController extends Controller
             $table->addColumn('nama_pelapor_name', function ($row) {
                 return $row->nama_pelapor ? $row->nama_pelapor->name : '';
             });
+
+            // $table->addColumn('photos', function($row) {
+            //     return $row->photos ? $row->photos : ""; 
+            // });
 
             $table->addColumn('dept_origin_name', function ($row) {
                 // 
@@ -76,6 +80,10 @@ class IncidentReportsController extends Controller
                 return $row->dept_designation ? $row->dept_designation->name : '';
             });
 
+            // $table->addColumn('action_by_name', function($row) {
+            //     return $row->action_by ? $row->action_by->name : '';
+            // });
+            
             $table->addColumn('reviewed_by_name', function ($row) {
                 return $row->reviewed_by ? $row->reviewed_by->name : '';
             });
@@ -88,12 +96,98 @@ class IncidentReportsController extends Controller
                 return $row->result ? $row->result->name : '';
             });
 
-            $table->rawColumns(['actions', 'placeholder', 'nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'reviewed_by', 'acknowledge_by','result']);
+            $table->rawColumns(['actions', 'placeholder', 'nama_pelapor', 'dept_origin', 'root_cause', 'action_by', 'dept_designation', 'reviewed_by', 'acknowledge_by','result']);
             return $table->make(true);
             
         }
         
+        else if(auth()->user()->isSupervisor()){
+            $auth_id = auth()->user()->team->id;
+            dd($auth_id);
+            if ($request->ajax()) {
+                $query = IncidentReport::with(['nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'reviewed_by', 'acknowledge_by', 'team']);
+                $table = Datatables::of($query);
+                $table->addColumn('placeholder', '&nbsp;');
+                $table->addColumn('actions', '&nbsp;');
+    
+                $table->editColumn('actions', function ($row) {
+                    $viewGate      = 'incident_report_show';
+                    $editGate      = 'incident_report_edit';
+                    $deleteGate    = 'incident_report_delete';
+                    $crudRoutePart = 'incident-reports';
+    
+                    return view('partials.datatablesActions', compact(
+                        'viewGate',
+                        'editGate',
+                        'deleteGate',
+                        'crudRoutePart',
+                        'row'
+                    ));
+                });
+    
+                $table->editColumn('id', function ($row) {
+                    return $row->id ? $row->id : "";
+                });
+                $table->addColumn('nama_pelapor_name', function ($row) {
+                    return $row->nama_pelapor ? $row->nama_pelapor->name : '';
+                });
+    
+                $table->addColumn('dept_origin_name', function ($row) {
+                    // 
+                    // $data = DB::table('incident_reports')->select('team_id')->where('team_id','=','3')->get();
+                    // $data = DB::table('incident_reports')
+                    // ->join('teams','incident_reports.team_id','=','teams.id')
+                    // ->select('name')->get();
+                    // dd(json_encode($data));
+                    return $row->team ? $row->team->name : '';
+                });
+    
+                $table->editColumn('location', function ($row) {
+                    return $row->location ? $row->location : "";
+                });
+    
+                $table->addColumn('root_cause_root_cause', function ($row) {
+                    return $row->root_cause ? $row->root_cause->root_cause : '';
+                });
+    
+                $table->editColumn('perbaikan', function ($row) {
+                    return $row->perbaikan ? $row->perbaikan : "";
+                });
+                $table->editColumn('pencegahan', function ($row) {
+                    return $row->pencegahan ? $row->pencegahan : "";
+                });
+    
+                $table->addColumn('dept_designation_name', function ($row) {
+                    return $row->dept_designation ? $row->dept_designation->name : '';
+                });
+    
+                $table->addColumn('reviewed_by_name', function ($row) {
+                    return $row->reviewed_by ? $row->reviewed_by->name : '';
+                });
+    
+                $table->addColumn('acknowledge_by_name', function ($row) {
+                    return $row->acknowledge_by ? $row->acknowledge_by->name : '';
+                });
+                
+                $table->addColumn('result_name', function ($row) {
+                    return $row->result ? $row->result->name : '';
+                });
+    
+                $table->rawColumns(['actions', 'placeholder', 'nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'reviewed_by', 'acknowledge_by','result']);
+                return $table->make(true);
+                
+            }
+        }
         return view('admin.incidentReports.index');
+    }
+
+    public function getDataForSupervisor(Request $request){
+        if ($request->ajax()) {
+            $query = IncidentReport::with(['nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'reviewed_by', 'acknowledge_by', 'team']);
+            $table = Datatables::of($query);
+
+            
+        }
     }
 
     public function create()
@@ -151,7 +245,7 @@ class IncidentReportsController extends Controller
     {
         abort_if(Gate::denies('incident_report_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $incidentReport->load('nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'reviewed_by', 'acknowledge_by', 'team');
+        $incidentReport->load('nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'action_by', 'reviewed_by', 'acknowledge_by', 'team');
 
         return view('admin.incidentReports.show', compact('incidentReport'));
     }

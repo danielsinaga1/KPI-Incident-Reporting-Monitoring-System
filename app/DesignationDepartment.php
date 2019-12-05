@@ -29,4 +29,6 @@ class DesignationDepartment extends Model
     {
         return $this->hasMany(IncidentReport::class, 'dept_designated_id', 'id');
     }
+
+
 }

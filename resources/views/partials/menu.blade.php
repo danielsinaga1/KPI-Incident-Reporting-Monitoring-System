@@ -115,13 +115,36 @@
                             @can('result_access')
                             <li class="{{ request()->is('admin/results') || request()->is('admin/results/*') ? 'active' : '' }}">
                                 <a href="{{ route("admin.results.index") }}">
-                                    <i class="fa-fw fas fa-male">
+                                    <i class="fa fa-bell-o">
 
                                     </i>
                                     <span>{{ trans('cruds.result.title') }}</span>
                                 </a>
                             </li>
                         @endcan
+
+                        @can('my_incident_report_access')
+                        <li class="{{ request()->is('admin/my-incident-reports') || request()->is('admin/my-incident-reports/*') ? 'active' : '' }}">
+                            <a href="{{ route("admin.my-incident-reports.index") }}">
+                                <i class="fa fa-list-alt">
+
+                                </i>
+                                <span>{{ trans('cruds.myIncidentReport.title') }}</span>
+                            </a>
+                        </li>
+                    @endcan
+
+                    
+                    @can('task_incident_report_access')
+                    <li class="{{ request()->is('admin/task-incident-reports') || request()->is('admin/task-incident-reports/*') ? 'active' : '' }}">
+                        <a href="{{ route("admin.task-incident-reports.index") }}">
+                            <i class="fa fa-tasks">
+
+                            </i>
+                            <span>{{ trans('cruds.taskIncidentReport.title') }}</span>
+                        </a>
+                    </li>
+                @endcan
                     </ul>
                 </li>
             @endcan
@@ -188,14 +211,14 @@
                     </ul>
                 </li>
             @endcan
-            <li>
+            {{-- <li>
                 <a href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                     <i class="fas fa-fw fa-sign-out-alt">
 
                     </i>
                     {{ trans('global.logout') }}
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </section>
 </aside>

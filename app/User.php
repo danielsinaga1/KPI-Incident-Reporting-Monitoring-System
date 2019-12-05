@@ -35,6 +35,7 @@ class User extends Authenticatable
         'name',
         'email',
         'team_id',
+        'role_id',
         'password',
         'created_at',
         'updated_at',
@@ -47,6 +48,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(IncidentReport::class, 'nama_pelapor_id', 'id');
     }
+
+    // public function actionIncidentReports(){
+    //     return $this->hasMany(IncidentReport::class, 'action_by_id','id');
+    // }
 
     public function assets()
     {
@@ -80,50 +85,51 @@ class User extends Authenticatable
         $this->notify(new ResetPassword($token));
     }
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
+    // public function roles()
+    // {
+    //     return $this->belongsToMany(Role::class);
+    // }
 
     public function team()
     {
         return $this->belongsTo(Team::class, 'team_id');
     }
     
+    public function role(){
+        return $this->belongsTo(Role::class,'role_id');
+    }
+
     public function isManager(){
-        $userId = Auth::user()->id();
-        $UserRole = UserRole::where('user_id',$userId)->first();
-        if($UserRole->roles->id == 6){
+        $UserRole = auth()->user()->role->id;
+        if($UserRole == 6){
             return true;
         }
         return false;
     }
 
     public function isSupervisor(){
-        $userId = Auth::user()->id();
-        $UserRole = UserRole::where('user_id',$userId)->first();
-        if($UserRole->roles->id == 4){
+        $UserRole = auth()->user()->role->id;
+        if($UserRole == 4){
             return true;
         }
         return false;
     }
 
     public function isSuperintendent(){
-        $userId = Auth::user()->id();
-        $UserRole = UserRole::where('user_id',$userId)->first();
-        if($UserRole->roles->id == 5){
+        $UserRole = auth()->user()->role->id;
+        if($UserRole == 5){
             return true;
         }
         return false;
     }
 
     public function isGeneralManager(){
-        $userId = Auth::user()->id();
-        $UserRole = UserRole::where('user_id',$userId)->first();
-        if($UserRole->roles->id == 7){
+        $UserRole = auth()->user()->role->id;
+        if($UserRole == 7){
             return true;
         }
         return false;
     }
+    
     
 }

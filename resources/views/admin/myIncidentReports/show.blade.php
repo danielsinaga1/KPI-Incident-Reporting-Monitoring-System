@@ -7,7 +7,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ trans('global.show') }} {{ trans('cruds.incidentReport.title') }}
+                    {{ trans('global.show') }} {{ trans('cruds.myIncidentReport.title') }}
                 </div>
                 <div class="panel-body">
 
@@ -16,7 +16,7 @@
                             <tbody>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.incidentReport.fields.id') }}
+                                        {{ trans('cruds.myIncidentReport.fields.id') }}
                                     </th>
                                     <td>
                                         {{ $incidentReport->id }}
@@ -24,7 +24,15 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.incidentReport.fields.nama_pelapor') }}
+                                        {{ trans('cruds.myIncidentReport.fields.no_laporan') }}
+                                    </th>
+                                    <td>
+                                        {{ $incidentReport->no_laporan }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.myIncidentReport.fields.nama_pelapor') }}
                                     </th>
                                     <td>
                                         {{ $incidentReport->nama_pelapor->name ?? '' }}
@@ -32,7 +40,7 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.incidentReport.fields.dept_origin') }}
+                                        {{ trans('cruds.myIncidentReport.fields.dept_origin') }}
                                     </th>
                                     <td>
                                         {{ $incidentReport->dept_origin->name ?? '' }}
@@ -40,7 +48,7 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.incidentReport.fields.location') }}
+                                        {{ trans('cruds.myIncidentReport.fields.location') }}
                                     </th>
                                     <td>
                                         {{ $incidentReport->location }}
@@ -48,15 +56,27 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.incidentReport.fields.date_incident') }}
+                                        {{ trans('cruds.myIncidentReport.fields.date_incident') }}
                                     </th>
                                     <td>
                                         {{ $incidentReport->date_incident }}
                                     </td>
                                 </tr>
                                 <tr>
+                                        <th>
+                                            {{ trans('cruds.incidentReport.fields.photos') }}
+                                        </th>
+                                        <td>
+                                            @foreach($incidentReport->photos as $key => $media)
+                                                <a href="{{ $media->getUrl() }}" target="_blank">
+                                                    <img src="{{ $media->getUrl('thumb') }}" width="50px" height="50px">
+                                                </a>
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                <tr>
                                     <th>
-                                        {{ trans('cruds.incidentReport.fields.root_cause') }}
+                                        {{ trans('cruds.myIncidentReport.fields.root_cause') }}
                                     </th>
                                     <td>
                                         {{ $incidentReport->root_cause->root_cause ?? '' }}
@@ -64,7 +84,7 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.incidentReport.fields.perbaikan') }}
+                                        {{ trans('cruds.myIncidentReport.fields.perbaikan') }}
                                     </th>
                                     <td>
                                         {{ $incidentReport->perbaikan }}
@@ -72,7 +92,7 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.incidentReport.fields.pencegahan') }}
+                                        {{ trans('cruds.myIncidentReport.fields.pencegahan') }}
                                     </th>
                                     <td>
                                         {{ $incidentReport->pencegahan }}
@@ -80,7 +100,7 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.incidentReport.fields.result') }}
+                                        {{ trans('cruds.myIncidentReport.fields.result') }}
                                     </th>
                                     <td>
                                         {{ $incidentReport->result->name ?? '' }}
@@ -88,25 +108,15 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.incidentReport.fields.date_dept_action') }}
+                                        {{ trans('cruds.myIncidentReport.fields.date_dept_action') }}
                                     </th>
                                     <td>
                                         {{ $incidentReport->date_dept_action }}
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.incidentReport.fields.action_by') }}
-                                    </th>
-                                    <td>
-                                        {{ $incidentReport->action_by->name ?? '' }}
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.incidentReport.fields.dept_designation') }}
+                                        {{ trans('cruds.myIncidentReport.fields.dept_designation') }}
                                     </th>
                                     <td>
                                         {{ $incidentReport->dept_designation->name   ?? '' }}
@@ -114,7 +124,15 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.incidentReport.fields.reviewed_by') }}
+                                        {{ trans('cruds.myIncidentReport.fields.action_by') }}
+                                    </th>
+                                    <td>
+                                        {{ $incidentReport->action_by->name ?? '' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.myIncidentReport.fields.reviewed_by') }}
                                     </th>
                                     <td>
                                         {{ $incidentReport->reviewed_by->name ?? '' }}
@@ -122,7 +140,7 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.incidentReport.fields.acknowledge_by') }}
+                                        {{ trans('cruds.myIncidentReport.fields.acknowledge_by') }}
                                     </th>
                                     <td>
                                         {{ $incidentReport->acknowledge_by->name ?? '' }}

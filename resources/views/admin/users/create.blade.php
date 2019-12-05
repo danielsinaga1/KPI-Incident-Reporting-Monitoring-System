@@ -49,15 +49,21 @@
                                 {{ trans('cruds.user.fields.password_helper') }}
                             </p>
                         </div>
-                        <div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
-                            <label for="roles">{{ trans('cruds.user.fields.roles') }}*
+                        <div class="form-group {{ $errors->has('role_id') ? 'has-error' : '' }}">
+                            <label for="roles">{{ trans('cruds.user.fields.role') }}*
                                 <span class="btn btn-info btn-xs select-all">{{ trans('global.select_all') }}</span>
                                 <span class="btn btn-info btn-xs deselect-all">{{ trans('global.deselect_all') }}</span></label>
-                            <select name="roles[]" id="roles" class="form-control select2" multiple="multiple" required>
+                                
+                                <select name="role_id" id="team" class="form-control select2">
+                                        @foreach($roles as $id => $role)
+                                            <option value="{{ $id }}" {{ (isset($user) && $user->role ? $user->role->id : old('role_id')) == $id ? 'selected' : '' }}>{{ $role }}</option>
+                                        @endforeach
+                                    </select>
+                                {{-- <select name="roles[]" id="roles" class="form-control select2" multiple="multiple" required>
                                 @foreach($roles as $id => $roles)
                                     <option value="{{ $id }}" {{ (in_array($id, old('roles', [])) || isset($user) && $user->roles->contains($id)) ? 'selected' : '' }}>{{ $roles }}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                             @if($errors->has('roles'))
                                 <p class="help-block">
                                     {{ $errors->first('roles') }}

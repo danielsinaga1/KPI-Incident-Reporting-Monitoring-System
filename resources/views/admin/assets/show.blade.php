@@ -51,7 +51,13 @@
                                         {{ trans('cruds.asset.fields.photos') }}
                                     </th>
                                     <td>
-                                        {{ $asset->photos }}
+                                        @if($asset->photos)
+                                                @foreach($asset->photos as $key => $media)
+                                                    <a href="{{ $media->getUrl() }}" target="_blank">
+                                                        {{ trans('global.view_file') }}
+                                                    </a>
+                                                @endforeach
+                                            @endif
                                     </td>
                                 </tr>
                                 <tr>

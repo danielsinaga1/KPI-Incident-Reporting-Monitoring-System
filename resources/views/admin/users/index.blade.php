@@ -39,7 +39,7 @@
                                         {{ trans('cruds.user.fields.department') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.user.fields.roles') }}
+                                        {{ trans('cruds.user.fields.role') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -65,9 +65,10 @@
                                             {{ $user->team->name ?? '' }}
                                         </td>
                                         <td>
-                                            @foreach($user->roles as $key => $item)
+                                            {{$user->role->title ?? ''}}
+                                            {{-- @foreach($user->roles as $key => $item)
                                                 <span class="label label-info label-many">{{ $item->title }}</span>
-                                            @endforeach
+                                            @endforeach --}}
                                         </td>
                                         <td>
                                             @can('user_show')

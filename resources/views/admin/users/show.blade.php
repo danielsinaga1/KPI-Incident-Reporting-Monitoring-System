@@ -48,12 +48,13 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        Roles
+                                        {{ trans('cruds.user.fields.role') }}
                                     </th>
                                     <td>
-                                        @foreach($user->roles as $id => $roles)
+                                            {{ $user->role->title }}
+                                        {{-- @foreach($user->roles as $id => $roles)
                                             <span class="label label-info label-many">{{ $roles->title }}</span>
-                                        @endforeach
+                                        @endforeach --}}
                                     </td>
                                 </tr>
                             </tbody>

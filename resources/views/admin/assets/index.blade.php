@@ -80,7 +80,7 @@
                                             @if($asset->photos)
                                                 @foreach($asset->photos as $key => $media)
                                                     <a href="{{ $media->getUrl() }}" target="_blank">
-                                                        {{ trans('global.view_file') }}
+                                                      {{ trans('global.view_file') }}
                                                     </a>
                                                 @endforeach
                                             @endif

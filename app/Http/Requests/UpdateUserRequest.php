@@ -26,13 +26,13 @@ class UpdateUserRequest extends FormRequest
                 'required',
                 'unique:users,email,' . request()->route('user')->id,
             ],
-            'roles.*' => [
-                'integer',
-            ],
-            'roles'   => [
-                'required',
-                'array',
-            ],
+            // 'roles.*' => [
+            //     'integer',
+            // ],
+            // 'roles'   => [
+            //     'required',
+            //     'array',
+            // ],
         ];
     }
 }

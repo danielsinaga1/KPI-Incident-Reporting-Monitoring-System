@@ -5,7 +5,7 @@
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
                 <a class="btn btn-success" href="{{ route("admin.incident-reports.create") }}">
-                    {{ trans('global.add') }} {{ trans('cruds.incidentReport.title_singular') }}
+                    {{ trans('global.add') }} {{ trans('cruds.taskIncidentReport.title_singular') }}
                 </a>
             </div>
         </div>
@@ -15,7 +15,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ trans('cruds.incidentReport.title_singular') }} {{ trans('global.list') }}
+                    {{ trans('cruds.taskIncidentReport.title_singular') }} {{ trans('global.list') }}
                 </div>
                 <div class="panel-body">
 
@@ -26,46 +26,43 @@
 
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.id') }}
+                                    {{ trans('cruds.taskIncidentReport.fields.id') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.nama_pelapor') }}
+                                    {{ trans('cruds.taskIncidentReport.fields.nama_pelapor') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.dept_origin') }}
+                                    {{ trans('cruds.taskIncidentReport.fields.dept_origin') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.location') }}
+                                    {{ trans('cruds.taskIncidentReport.fields.location') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.date_incident') }}
+                                    {{ trans('cruds.taskIncidentReport.fields.date_incident') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.root_cause') }}
+                                    {{ trans('cruds.taskIncidentReport.fields.root_cause') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.perbaikan') }}
+                                    {{ trans('cruds.taskIncidentReport.fields.perbaikan') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.pencegahan') }}
+                                    {{ trans('cruds.taskIncidentReport.fields.pencegahan') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.result') }}
+                                    {{ trans('cruds.taskIncidentReport.fields.result') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.date_dept_action') }}
+                                    {{ trans('cruds.taskIncidentReport.fields.date_dept_action') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.dept_designation') }}
+                                    {{ trans('cruds.taskIncidentReport.fields.dept_designation') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.action_by') }}
+                                    {{ trans('cruds.taskIncidentReport.fields.reviewed_by') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.reviewed_by') }}
-                                </th>
-                                <th>
-                                    {{ trans('cruds.incidentReport.fields.acknowledge_by') }}
+                                    {{ trans('cruds.taskIncidentReport.fields.acknowledge_by') }}
                                 </th>
                                 <th>
                                     &nbsp;
@@ -134,8 +131,7 @@
       { data: 'pencegahan', name: 'pencegahan' },
       { data: 'result_name', name: 'result.name' },
       { data: 'date_dept_action', name: 'date_dept_action' },
-      { data: 'dept_designation_name', name: 'dept_designation.name' }, 
-      { data: 'action_by_name', name: 'action_by.name'},
+      { data: 'dept_designation_name', name: 'dept_designation.name' },
       { data: 'reviewed_by_name', name: 'reviewed_by.name' },
       { data: 'acknowledge_by_name', name: 'acknowledge_by.name' },
       { data: 'actions', name: '{{ trans('global.actions') }}' }

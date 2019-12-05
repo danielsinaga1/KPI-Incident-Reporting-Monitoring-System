@@ -47,9 +47,10 @@ class AssetController extends Controller
     public function store(StoreAssetRequest $request)
     {
         $asset = Asset::create($request->all());
-
+        
         foreach ($request->input('photos', []) as $file) {
             $asset->addMedia(storage_path('tmp/uploads/' . $file))->toMediaCollection('photos');
+            dd($asset);
         }
 
         return redirect()->route('admin.assets.index');

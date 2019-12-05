@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('content')
 <div class="content">
-    @can('incident_report_create')
+    @can('my_incident_report_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route("admin.incident-reports.create") }}">
+                <a class="btn btn-success" href="{{ route("admin.my-incident-reports.create") }}">
                     {{ trans('global.add') }} {{ trans('cruds.incidentReport.title_singular') }}
                 </a>
             </div>
@@ -15,57 +15,62 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ trans('cruds.incidentReport.title_singular') }} {{ trans('global.list') }}
+                    {{ trans('cruds.myIncidentReport.title_singular') }} {{ trans('global.list') }}
                 </div>
                 <div class="panel-body">
-
                     <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-IncidentReport">
                         <thead>
                             <tr>
-                                <th width="10">
+                                <th width="10"></th>
+                                <th>
+                                    {{ trans('cruds.myIncidentReport.fields.id') }}
+                                </th>
+                                
+                                <th>
+                                    {{ trans('cruds.myIncidentReport.fields.no_laporan') }}
+                                </th>
 
+                                <th>
+                                    {{ trans('cruds.myIncidentReport.fields.nama_pelapor') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.id') }}
+                                    {{ trans('cruds.myIncidentReport.fields.dept_origin') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.nama_pelapor') }}
+                                    {{ trans('cruds.myIncidentReport.fields.location') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.dept_origin') }}
+                                    {{ trans('cruds.myIncidentReport.fields.photos') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.location') }}
+                                    {{ trans('cruds.myIncidentReport.fields.date_incident') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.date_incident') }}
+                                    {{ trans('cruds.myIncidentReport.fields.root_cause') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.root_cause') }}
+                                    {{ trans('cruds.myIncidentReport.fields.perbaikan') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.perbaikan') }}
+                                    {{ trans('cruds.myIncidentReport.fields.pencegahan') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.pencegahan') }}
+                                    {{ trans('cruds.myIncidentReport.fields.result') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.result') }}
+                                    {{ trans('cruds.myIncidentReport.fields.date_dept_action') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.date_dept_action') }}
+                                    {{ trans('cruds.myIncidentReport.fields.dept_designation') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.dept_designation') }}
+                                    {{ trans('cruds.myIncidentReport.fields.action_by') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.action_by') }}
+                                    {{ trans('cruds.myIncidentReport.fields.reviewed_by') }}
                                 </th>
                                 <th>
-                                    {{ trans('cruds.incidentReport.fields.reviewed_by') }}
-                                </th>
-                                <th>
-                                    {{ trans('cruds.incidentReport.fields.acknowledge_by') }}
+                                    {{ trans('cruds.myIncidentReport.fields.acknowledge_by') }}
                                 </th>
                                 <th>
                                     &nbsp;
@@ -73,6 +78,7 @@
                             </tr>
                         </thead>
                        </table>
+                    
                 </div>
             </div>
 
@@ -85,7 +91,7 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('incident_report_delete')
+@can('my_incident_report_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
   let deleteButton = {
     text: deleteButtonTrans,
@@ -121,21 +127,23 @@
     serverSide: true,
     retrieve: true,
     aaSorting: [],
-    ajax: "{{ route('admin.incident-reports.index') }}",
+    ajax: "{{ route('admin.my-incident-reports.index') }}",
     columns: [
       { data: 'placeholder', name: 'placeholder' },
       { data: 'id', name: 'id' },
+      { data: 'no_laporan', name: 'no_laporan' },
       { data: 'nama_pelapor_name', name: 'nama_pelapor.name' },
       { data: 'dept_origin_name'},
       { data: 'location', name: 'location' },
+      { data: 'photos', name: 'photos', sortable: false, searchable: false },
       { data: 'date_incident', name: 'date_incident' },
       { data: 'root_cause_root_cause', name: 'root_cause.root_cause' },
       { data: 'perbaikan', name: 'perbaikan' },
       { data: 'pencegahan', name: 'pencegahan' },
       { data: 'result_name', name: 'result.name' },
       { data: 'date_dept_action', name: 'date_dept_action' },
-      { data: 'dept_designation_name', name: 'dept_designation.name' }, 
-      { data: 'action_by_name', name: 'action_by.name'},
+      { data: 'dept_designation_name', name: 'dept_designation.name' },
+      { data: 'action_by_name', name: 'action_by.name' },
       { data: 'reviewed_by_name', name: 'reviewed_by.name' },
       { data: 'acknowledge_by_name', name: 'acknowledge_by.name' },
       { data: 'actions', name: '{{ trans('global.actions') }}' }

@@ -8,6 +8,9 @@ use App\Http\Requests\MassDestroyCategoryIncidentRequest;
 use App\Http\Requests\StoreCategoryIncidentRequest;
 use App\Http\Requests\UpdateCategoryIncidentRequest;
 use Gate;
+use DB;
+use App\IncidentReport;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,7 +21,16 @@ class CategoryIncidentController extends Controller
         abort_if(Gate::denies('category_incident_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $categoryIncidents = CategoryIncident::all();
-
+        // $dt = $now->year;
+        $query1 = DB::table('incident_reports')->join('teams','incident_reports.team_id','=','teams.id')->select('incident_reports.*')->get();        
+        $year = Carbon::now()->format('y');
+        $month = Carbon::now()->format('m');
+    
+        $nextNumberReport = "LI-". $month . $year . "-" . IncidentReport::getNextNumberReport();
+       $test =  IncidentReport::orderBy('created_at','desc')->first();
+        $a = $test->no_laporan;
+        $lastReport = DB::select('SELECT * from incident_reports limit 1');
+        dd($lastReport);
         return view('admin.categoryIncidents.index', compact('categoryIncidents'));
     }
 
