@@ -49,9 +49,9 @@ class User extends Authenticatable
         return $this->hasMany(IncidentReport::class, 'nama_pelapor_id', 'id');
     }
 
-    // public function actionIncidentReports(){
-    //     return $this->hasMany(IncidentReport::class, 'action_by_id','id');
-    // }
+    public function actionIncidentReports(){
+        return $this->hasMany(IncidentReport::class, 'action_by_id','id');
+    }
 
     public function assets()
     {
@@ -99,6 +99,13 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class,'role_id');
     }
 
+    public function isAdmin(){
+        $userRole = auth()->user()->role->id;
+        if($userRole == 1) {
+            return true;
+        }
+        return false;
+    }
     public function isManager(){
         $UserRole = auth()->user()->role->id;
         if($UserRole == 6){

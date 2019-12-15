@@ -11,7 +11,7 @@
                 </div>
                 <div class="panel-body">
 
-                    <form action="{{ route("admin.incident-reports.update", [$incidentReport->id]) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route("admin.task-incident-reports.update", [$incidentReport->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group {{ $errors->has('location') ? 'has-error' : '' }}">

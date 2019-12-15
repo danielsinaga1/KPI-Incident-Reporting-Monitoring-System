@@ -32,21 +32,42 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">
+                        {{-- <div class="col-lg-12">
+                                <div class="col-lg-8">
+                                        <a class="btn btn-default" href="{{ url()->previous() }}">
+                        {{ trans('global.back_to_list') }}
+                        </a>
+                    </div>
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-2">
+                        <button type="button" class="btn btn-success" style="text-right">Approve</button>
+                        <button type="button" class="btn btn-danger" style="">Reject</button>
+                    </div>
+
+                </div> --}}
+                @if (auth()->user()->isSupervisor())
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-success">Approve</button>
+                    <button type="button" class="btn btn-danger">Reject</button>
+                    <div class="pull-right">
+                        <a class="btn btn-default" href="{{ url()->previous() }}">
                             {{ trans('global.back_to_list') }}
                         </a>
                     </div>
-
-                    <ul class="nav nav-tabs">
-
-                    </ul>
-                    <div class="tab-content">
-
-                    </div>
                 </div>
+                @endif
             </div>
 
+
+            <ul class="nav nav-tabs">
+
+            </ul>
+            <div class="tab-content">
+
+            </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 @endsection

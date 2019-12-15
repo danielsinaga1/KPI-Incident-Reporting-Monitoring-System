@@ -11,7 +11,7 @@
                 </div>
                 <div class="panel-body">
 
-                    <form action="{{ route("admin.incident-reports.store") }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route("admin.task-incident-reports.store") }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group {{ $errors->has('location') ? 'has-error' : '' }}">
                             <label for="location">{{ trans('cruds.taskIncidentReport.fields.location') }}*</label>

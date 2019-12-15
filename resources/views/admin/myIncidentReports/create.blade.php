@@ -11,8 +11,7 @@
                 </div>
                 <div class="panel-body">
 
-                    <form action="{{ route("admin.my-incident-reports.store") }}" method="POST"
-                        enctype="multipart/form-data">
+                    <form action="{{ route("admin.my-incident-reports.store") }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group {{ $errors->has('location') ? 'has-error' : '' }}">
                             <label for="location">{{ trans('cruds.myIncidentReport.fields.location') }}*</label>
@@ -45,14 +44,15 @@
                         </div>
 
                         <div class="form-group {{ $errors->has('photos') ? 'has-error' : '' }}">
-                                <label for="photos">{{ trans('cruds.myIncidentReport.fields.photos') }}</label>
-                                <div class="needsclick dropzone" id="photos-dropzone">
-                                </div>
-                                @if($errors->has('photos'))
-                                    <span class="help-block" role="alert">{{ $errors->first('photos') }}</span>
-                                @endif
-                                <span class="help-block">{{ trans('cruds.myIncidentReport.fields.photos_helper') }}</span>
+                            <label for="photos">{{ trans('cruds.myIncidentReport.fields.photos') }}</label>
+                            <div class="needsclick dropzone" id="photos-dropzone">
+
                             </div>
+                            @if($errors->has('photos'))
+                            <span class="help-block" role="alert">{{ $errors->first('photos') }}</span>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.myIncidentReport.fields.photos_helper') }}</span>
+                        </div>
 
                         <div class="form-group {{ $errors->has('root_cause_id') ? 'has-error' : '' }}">
                             <label for="root_cause">{{ trans('cruds.myIncidentReport.fields.root_cause') }}*</label>
@@ -69,7 +69,7 @@
                             </p>
                             @endif
                         </div>
-                        
+
                         <div class="form-group {{ $errors->has('dept_designated_id') ? 'has-error' : '' }}">
                             <label
                                 for="dept_designation">{{ trans('cruds.myIncidentReport.fields.dept_designation') }}*</label>
@@ -104,114 +104,107 @@
 @section('scripts')
 <script>
     var uploadedPhotosMap = {}
-Dropzone.options.photosDropzone = {
-    url: '{{ route('admin.assets.storeMedia') }}',
-    maxFilesize: 2, // MB
-    addRemoveLinks: true,
-    headers: {
-      'X-CSRF-TOKEN': "{{ csrf_token() }}"
-    },
-    params: {
-      size: 2
-    },
-    success: function (file, response) {
-      $('form').append('<input type="hidden" name="photos[]" value="' + response.name + '">')
-      uploadedPhotosMap[file.name] = response.name
-    },
-    removedfile: function (file) {
-      file.previewElement.remove()
-      var name = ''
-      if (typeof file.file_name !== 'undefined') {
-        name = file.file_name
-      } else {
-        name = uploadedPhotosMap[file.name]
-      }
-      $('form').find('input[name="photos[]"][value="' + name + '"]').remove()
-    },
-    init: function () {
-@if(isset($asset) && $asset->photos)
-          var files =
-            {!! json_encode($asset->photos) !!}
-              for (var i in files) {
-              var file = files[i]
-              this.options.addedfile.call(this, file)
-              file.previewElement.classList.add('dz-complete')
-              $('form').append('<input type="hidden" name="photos[]" value="' + file.file_name + '">')
+    Dropzone.options.photosDropzone = {
+        url: '{{ route('admin.my-incident-reports.storeMedia') }}',
+        maxFilesize: 4, // MB
+        addRemoveLinks: true,
+        headers: {
+            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        },
+        params: {
+            size: 2
+        },
+        success: function (file, response) {
+            $('form').append('<input type="hidden" name="photos[]" value="' + response.name + '">')
+            uploadedPhotosMap[file.name] = response.name
+        },
+        removedfile: function (file) {
+            file.previewElement.remove()
+            var name = ''
+            if (typeof file.file_name !== 'undefined') {
+                name = file.file_name
+            } else {
+                name = uploadedPhotosMap[file.name]
             }
-@endif
-    },
-     error: function (file, response) {
-         if ($.type(response) === 'string') {
-             var message = response //dropzone sends it's own error messages in string
-         } else {
-             var message = response.errors.file
-         }
-         file.previewElement.classList.add('dz-error')
-         _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
-         _results = []
-         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-             node = _ref[_i]
-             _results.push(node.textContent = message)
-         }
+            $('form').find('input[name="photos[]"][value="' + name + '"]').remove()
+        },
+        init: function () {
+    @if(isset($incidentReport) && $incidentReport->photos)
+            var files = { !!json_encode($incidentReport->photos) !!}
 
-         return _results
-     }
-}
+            for (var i in files) {
+                var file = files[i]
+                this.options.addedfile.call(this, file)
+                file.previewElement.classList.add('dz-complete')
+                $('form').append('<input type="hidden" name="photos[]" value="' + file.file_name + '">')
+            }
+    @endif
+        },
+        error: function (file, response) {
+            if ($.type(response) === 'string') {
+                var message = response //dropzone sends it's own error messages in string
+            } else {
+                var message = response.errors.file
+            }
+            file.previewElement.classList.add('dz-error')
+            _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
+            _results = []
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                node = _ref[_i]
+                _results.push(node.textContent = message)
+            }
+
+            return _results
+        }
+    }
 </script>
+@endsection
 {{-- <script>
     var uploadedUploadFileMap = {}
 Dropzone.options.uploadFileDropzone = {
     url: '{{ route('admin.my-incident-reports.storeMedia') }}',
-    maxFilesize: 10, // MB
-    addRemoveLinks: true,
-    headers: {
-      'X-CSRF-TOKEN': "{{ csrf_token() }}"
-    },
-    params: {
-      size: 10
-    },
-    success: function (file, response) {
-      $('form').append('<input type="hidden" name="upload_file[]" value="' + response.name + '">')
-      uploadedUploadFileMap[file.name] = response.name
-    },
-    removedfile: function (file) {
-      file.previewElement.remove()
-      var name = ''
-      if (typeof file.file_name !== 'undefined') {
-        name = file.file_name
-      } else {
-        name = uploadedUploadFileMap[file.name]
-      }
-      $('form').find('input[name="upload_file[]"][value="' + name + '"]').remove()
-    },
-    init: function () {
-@if(isset($incidentReport) && $incidentReport->upload_file)
-          var files =
-            {!! json_encode($incidentReport->upload_file) !!}
-              for (var i in files) {
-              var file = files[i]
-              this.options.addedfile.call(this, file)
-              file.previewElement.classList.add('dz-complete')
-              $('form').append('<input type="hidden" name="upload_file[]" value="' + file.file_name + '">')
-            }
-@endif
-    },
-     error: function (file, response) {
-         if ($.type(response) === 'string') {
-             var message = response //dropzone sends it's own error messages in string
-         } else {
-             var message = response.errors.file
-         }
-         file.previewElement.classList.add('dz-error')
-         _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
-         _results = []
-         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-             node = _ref[_i]
-             _results.push(node.textContent = message)
-         }
-
-         return _results
-     }
+maxFilesize: 10, // MB
+addRemoveLinks: true,
+headers: {
+'X-CSRF-TOKEN': "{{ csrf_token() }}"
+},
+params: {
+size: 10
+},
+success: function (file, response) {
+$('form').append('<input type="hidden" name="upload_file[]" value="' + response.name + '">')
+uploadedUploadFileMap[file.name] = response.name
+},
+removedfile: function (file) {
+file.previewElement.remove()
+var name = ''
+if (typeof file.file_name !== 'undefined') {
+name = file.file_name
+} else {
+name = uploadedUploadFileMap[file.name]
 }
-</script> --}}
-@endsection
+$('form').find('input[name="upload_file[]"][value="' + name + '"]').remove()
+},
+init: function () {
+@if(isset($incidentReport) && $incidentReport->upload_file)
+var files =
+{!! json_encode($incidentReport->upload_file) !!}
+for (var i in files) {
+var file = files[i]
+this.options.addedfile.call(this, file)
+file.previewElement.classList.add('dz-complete')
+$('form').append('<input type="hidden" name="upload_file[]" value="' + file.file_name + '">')
+}
+@endif
+},
+error: function (file, response) {
+if ($.type(response) === 'string') {
+var message = response //dropzone sends it's own error messages in string
+} else {
+var message = response.errors.file
+}
+file.previewElement.classList.add('dz-error')
+_ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
+_results = []
+for (_i = 0, _len = _ref.length; _i < _len; _i++) { node=_ref[_i] _results.push(node.textContent=message) } return
+    _results } } </script> --}} {{-- @endsection --}}

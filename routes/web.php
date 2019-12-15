@@ -69,13 +69,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('designation-departments/destroy', 'DesignationDepartmentController@massDestroy')->name('designation-departments.massDestroy');
     Route::resource('designation-departments', 'DesignationDepartmentController');
 
-        // My Incident Reports
+    // My Incident Reports
     Route::delete('my-incident-reports/destroy', 'MyIncidentReportController@massDestroy')->name('my-incident-reports.massDestroy');
-    Route::post('my-incident-reports/media', 'MyIncidentReportsController@storeMedia')->name('my-incident-reports.storeMedia');
+    Route::post('my-incident-reports/media', 'MyIncidentReportController@storeMedia')->name('my-incident-reports.storeMedia');
+    Route::get('my-incident-reports/{incidentReport_id}/approve',  'MyIncidentReportController@approve')->name('my-incident-reports.approve');
     Route::resource('my-incident-reports', 'MyIncidentReportController');
 
     // Task Incident Reports
-    Route::delete('task-incident-reports/destroy', 'IncidentReportsController@massDestroy')->name('task-incident-reports.massDestroy');
-    Route::resource('task-incident-reports', 'TaskIncidentReportsController');
+    Route::delete('task-incident-reports/destroy', 'TaskIncidentReportController@massDestroy')->name('task-incident-reports.massDestroy');
+    Route::resource('task-incident-reports', 'TaskIncidentReportController');
     
 });

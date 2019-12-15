@@ -24,7 +24,6 @@ class Result extends Model
         'deleted_at',
     ];
 
-
     public function incidentReports()
     {
         return $this->hasMany(IncidentReport::class, 'result_id', 'id');

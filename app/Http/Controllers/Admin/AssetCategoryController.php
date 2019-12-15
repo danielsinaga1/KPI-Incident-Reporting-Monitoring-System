@@ -8,6 +8,7 @@ use App\Http\Requests\MassDestroyAssetCategoryRequest;
 use App\Http\Requests\StoreAssetCategoryRequest;
 use App\Http\Requests\UpdateAssetCategoryRequest;
 use Gate;
+use Alert;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -34,6 +35,7 @@ class AssetCategoryController extends Controller
         $assetCategory = AssetCategory::create($request->all());
 
         return redirect()->route('admin.asset-categories.index');
+        
     }
 
     public function edit(AssetCategory $assetCategory)

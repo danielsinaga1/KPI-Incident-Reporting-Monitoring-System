@@ -77,6 +77,7 @@ return [
     'app_import_data'                      => 'Import data',
     'app_imported_rows_to_table'           => 'Imported :rows rows to :table table',
     'app_parse_csv'                        => 'Parse CSV',
+    'approve_ir'                           => 'Are you sure want to approve Incident Report?',
     'asset'                                => 'Asset',
     'assets'                               => 'Assets',
     'assets_history'                       => 'Assets history',

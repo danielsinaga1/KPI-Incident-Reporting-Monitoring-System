@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Traits\MultiTenantModelTrait;
+// use App\Traits\MultiTenantModelTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,9 +15,8 @@ class IncidentReport extends Model implements HasMedia
     use SoftDeletes, HasMediaTrait;
 
     public $table = 'incident_reports';
-
+    
     protected $appends = [
-        // 'gallery',
         'photos',
     ];
     protected $dates = [
@@ -55,64 +54,7 @@ class IncidentReport extends Model implements HasMedia
 
     public function dept_origin()
     {
-        return $this->belongsTo(Team::class, 'dept_origin_id');
-    }
-
-    public function getDateIncidentAttribute($value)
-    {
-        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
-    }
-
-    public function setDateIncidentAttribute($value)
-    {
-        $this->attributes['date_incident'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
-    }
-
-    public function root_cause()
-    {
-        return $this->belongsTo(RootCause::class, 'root_cause_id');
-    }
-
-    public function registerMediaConversions(Media $media = null){
-        $this->addMediaConversion('thumb')->width(50)->height(50);
-        $this->addMediaConversion('big_thumb')->width(50)->height(50);
-    }
-
-    public function getPhotosAttribute(){
-
-        $files = $this->getMedia('photos');
-        $files->each(function ($item) {
-            $item->url       = $item->getUrl();
-            $item->thumbnail = $item->getUrl('thumb');
-        });
-
-        
-        // $file = $this->getMedia('photos')->last();
-
-        // if($file) {
-        //     $file->url = $file->getUrl();
-        //     $file->thumbnail = $file->getUrl('thumb');
-        // }
-        return $files;
-    }
-
-    public function getGalleryAttribute() {
-        $files = $this->getMedia('gallery');
-        $files->each(function ($item) {
-            $item->url = $item->getUrl();
-            $item->thumbnail = $item->getUrl('thumb');
-        });
-
-        return $files;
-    }
-    public function getDateDeptActionAttribute($value)
-    {
-        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
-    }
-
-    public function setDateDeptActionAttribute($value)
-    {
-        $this->attributes['date_dept_action'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+        return $this->belongsTo(Team::class, 'team_id');
     }
 
     public function dept_designation()
@@ -144,6 +86,61 @@ class IncidentReport extends Model implements HasMedia
         return $this->belongsTo(Result::class, 'result_id');
     }
 
+    public function root_cause()
+    {
+        return $this->belongsTo(RootCause::class, 'root_cause_id');
+    }
+    public function getDateIncidentAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
+    }
+
+    public function setDateIncidentAttribute($value)
+    {
+        $this->attributes['date_incident'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
+    }
+    
+    public function registerMediaConversions(Media $media = null){
+        $this->addMediaConversion('thumb')->width(50)->height(50);
+        // $this->addMediaConversion('big_thumb')->width(50)->height(50);
+    }
+
+    public function getPhotosAttribute(){
+
+        return $this->getMedia('photos');
+        // $files->each(function ($item) {
+        //     $item->url       = $item->getUrl();
+        //     $item->thumbnail = $item->getUrl('thumb');
+        // });
+
+        
+        // $file = $this->getMedia('photos')->last();
+
+        // if($file) {
+        //     $file->url = $file->getUrl();
+        //     $file->thumbnail = $file->getUrl('thumb');
+        // }
+    }
+
+    // public function getGalleryAttribute() {
+    //     $files = $this->getMedia('gallery');
+    //     $files->each(function ($item) {
+    //         $item->url = $item->getUrl();
+    //         $item->thumbnail = $item->getUrl('thumb');
+    //     });
+
+    //     return $files;
+    // }
+    public function getDateDeptActionAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
+    }
+
+    public function setDateDeptActionAttribute($value)
+    {
+        $this->attributes['date_dept_action'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    }
+
     public static function getNextNumberReport(){
         $year = Carbon::now()->format('y');
         $month = Carbon::now()->format('m');
@@ -157,13 +154,7 @@ class IncidentReport extends Model implements HasMedia
         } else {
             $number = explode("-", $lastReport->no_laporan);
         }
-        // if(!$lastReport){
-        //     $number = 0;
-        // }else {
-        //     $number = explode("-", $lastReport->no_laporan);
-        //     $number = $number[1];
-            
-        // }    
+
         if($yearMonth != $number[1]) {    
         $number = 0;
         }else {

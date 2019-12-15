@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('content')
 <div class="content">
-    @can('incident_report_create')
+    @can('task_incident_report_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route("admin.incident-reports.create") }}">
+                <a class="btn btn-success" href="{{ route("admin.task-incident-reports.create") }}">
                     {{ trans('global.add') }} {{ trans('cruds.taskIncidentReport.title_singular') }}
                 </a>
             </div>
@@ -29,6 +29,9 @@
                                     {{ trans('cruds.taskIncidentReport.fields.id') }}
                                 </th>
                                 <th>
+                                    {{ trans('cruds.myIncidentReport.fields.no_laporan') }}
+                                </th>
+                                <th>
                                     {{ trans('cruds.taskIncidentReport.fields.nama_pelapor') }}
                                 </th>
                                 <th>
@@ -36,6 +39,9 @@
                                 </th>
                                 <th>
                                     {{ trans('cruds.taskIncidentReport.fields.location') }}
+                                </th>
+                                <th>
+                                    {{ trans('cruds.myIncidentReport.fields.photos') }}
                                 </th>
                                 <th>
                                     {{ trans('cruds.taskIncidentReport.fields.date_incident') }}
@@ -57,6 +63,9 @@
                                 </th>
                                 <th>
                                     {{ trans('cruds.taskIncidentReport.fields.dept_designation') }}
+                                </th>
+                                <th>
+                                    {{ trans('cruds.taskIncidentReport.fields.action_by') }}
                                 </th>
                                 <th>
                                     {{ trans('cruds.taskIncidentReport.fields.reviewed_by') }}
@@ -82,11 +91,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('incident_report_delete')
+@can('task_incident_report_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}';
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.incident-reports.massDestroy') }}",
+    url: "{{ route('admin.task-incident-reports.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).data(), function (entry) {
@@ -118,13 +127,15 @@
     serverSide: true,
     retrieve: true,
     aaSorting: [],
-    ajax: "{{ route('admin.incident-reports.index') }}",
+    ajax: "{{ route('admin.task-incident-reports.index') }}",
     columns: [
       { data: 'placeholder', name: 'placeholder' },
       { data: 'id', name: 'id' },
+      { data: 'no_laporan', name: 'no_laporan' },
       { data: 'nama_pelapor_name', name: 'nama_pelapor.name' },
       { data: 'dept_origin_name'},
       { data: 'location', name: 'location' },
+      { data: 'photos', name: 'photos', sortable: false, searchable: false },
       { data: 'date_incident', name: 'date_incident' },
       { data: 'root_cause_root_cause', name: 'root_cause.root_cause' },
       { data: 'perbaikan', name: 'perbaikan' },
@@ -132,6 +143,7 @@
       { data: 'result_name', name: 'result.name' },
       { data: 'date_dept_action', name: 'date_dept_action' },
       { data: 'dept_designation_name', name: 'dept_designation.name' },
+      { data: 'action_by_name', name: 'action_by.name' },
       { data: 'reviewed_by_name', name: 'reviewed_by.name' },
       { data: 'acknowledge_by_name', name: 'acknowledge_by.name' },
       { data: 'actions', name: '{{ trans('global.actions') }}' }

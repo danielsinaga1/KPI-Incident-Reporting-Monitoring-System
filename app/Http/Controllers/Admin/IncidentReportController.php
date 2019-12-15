@@ -185,8 +185,6 @@ class IncidentReportController extends Controller
         if ($request->ajax()) {
             $query = IncidentReport::with(['nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'reviewed_by', 'acknowledge_by', 'team']);
             $table = Datatables::of($query);
-
-            
         }
     }
 
@@ -246,7 +244,7 @@ class IncidentReportController extends Controller
         abort_if(Gate::denies('incident_report_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $incidentReport->load('nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'action_by', 'reviewed_by', 'acknowledge_by', 'team');
-
+        // dd($incidentReport);
         return view('admin.incidentReports.show', compact('incidentReport'));
     }
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Symfony\Component\HttpFoundation\Response;
+use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateMyIncidentReportRequest extends FormRequest
@@ -37,12 +39,12 @@ class UpdateMyIncidentReportRequest extends FormRequest
                 'required',
                 'integer',
             ],
-            'perbaikan'     => [
-                'required',
-            ],
-            'pencegahan'    => [
-                'required',
-            ],
+            // 'perbaikan'     => [
+            //     'required',
+            // ],
+            // 'pencegahan'    => [
+            //     'required',
+            // ],
         ];
     }
 }

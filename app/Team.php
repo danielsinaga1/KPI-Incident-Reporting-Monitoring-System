@@ -32,7 +32,7 @@ class Team extends Model
 
     public function incidentReports()
     {
-        return $this->hasMany(IncidentReport::class, 'dept_origin_id', 'id');
+        return $this->hasMany(IncidentReport::class, 'team_id', 'id');
     }
 
     public function categoryIncidents()

@@ -35,7 +35,7 @@
                                         {{ trans('cruds.myIncidentReport.fields.nama_pelapor') }}
                                     </th>
                                     <td>
-                                        {{ $incidentReport->nama_pelapor->name ?? '' }}
+                                        {{ $incidentReport->nama_pelapor->name}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -43,7 +43,7 @@
                                         {{ trans('cruds.myIncidentReport.fields.dept_origin') }}
                                     </th>
                                     <td>
-                                        {{ $incidentReport->dept_origin->name ?? '' }}
+                                        {{ $incidentReport->dept_origin->name }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -63,17 +63,17 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                        <th>
-                                            {{ trans('cruds.incidentReport.fields.photos') }}
-                                        </th>
-                                        <td>
-                                            @foreach($incidentReport->photos as $key => $media)
-                                                <a href="{{ $media->getUrl() }}" target="_blank">
-                                                    <img src="{{ $media->getUrl('thumb') }}" width="50px" height="50px">
-                                                </a>
-                                            @endforeach
-                                        </td>
-                                    </tr>
+                                    <th>
+                                        {{ trans('cruds.myIncidentReport.fields.photos') }}
+                                    </th>
+                                    <td>
+                                        @foreach($incidentReport->photos as $key => $media)
+                                        <a href="{{ $media->getUrl() }}" target="_blank">
+                                            <img src="{{ $media->getUrl('thumb') }}" width="50px" height="50px">
+                                        </a>
+                                        @endforeach
+                                    </td>
+                                </tr>
                                 <tr>
                                     <th>
                                         {{ trans('cruds.myIncidentReport.fields.root_cause') }}
@@ -153,6 +153,21 @@
                         </a>
                     </div>
 
+                    @if (auth()->user()->isSupervisor() || auth()->user()->isAdmin() && $incidentReport->result_id == 1 && $incidentReport == 2)
+                    <div class="panel-footer">
+                        {{-- <form id="approve-incidentReports-{{$incidentReport->id}}" action="{{route('admin.my-incident-reports.approve',$incidentReport->id)}}" method="POST">
+                            @csrf --}}
+                        {{-- <button type="button" class="btn btn-success btn-approve" onclick="return confirm('Are you sure want to approve Incident Report?')">Approve</button> --}}
+                        <a href="{{ route('admin.my-incident-reports.approve' , $incidentReport->id) }}" class="btn btn-success">Approve</a>
+                        <button type="button" class="btn btn-danger btn-reject" onclick="return confirm('Are you sure want to reject Incident Report?')" value="2">Reject</button>
+                        
+                        <div class="pull-right">
+                            <a class="btn btn-default" href="{{ url()->previous() }}">
+                                {{ trans('global.back_to_list') }}
+                            </a>
+                        </div>
+                    </div>
+                    @endif
 
                 </div>
             </div>
@@ -161,3 +176,49 @@
     </div>
 </div>
 @endsection
+{{-- @section('scripts')
+@parent
+<script>
+    // function approve(id) {
+    //     $.ajax({
+    //         url : "{{ route('admin.my-incident-reports.approve') }}",
+    //         type : 'POST',
+    //         dataType: 'json',
+    //         data: {
+    //         'id': id,
+    //     },
+    //     beforeSend: function(){
+    //     },
+    //     complete: function(){
+    //     },
+    //     success: function(resp) {
+    //         console.log(resp);
+    //     }
+    //     })
+    // }
+
+ $('.btn-approve').click(function(e) {
+    let deleteButtonTrans = '{{ trans('global.approve_ir') }}';
+       e.preventDefault();
+
+    /*Ajax Request Header setup*/
+    $.ajaxSetup({
+        headers: 'X-CSRF-TOKEN' : $
+    })
+
+     $.ajax({
+        url : "{{ route('admin.my-incident-reports.approve') }}",
+        method : 'POST',
+        dataType: 'json',
+        data: {
+            'id': id,
+        },
+        success: function (data) {
+            alert('success');
+        },
+        error: function (data) {
+            alert(data);
+        }
+     })
+ })
+</script> --}}

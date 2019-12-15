@@ -11,7 +11,7 @@
                 </div>
                 <div class="panel-body">
 
-                    <form action="{{ route("admin.incident-reports.update", [$incidentReport->id]) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route("admin.my-incident-reports.update", [$incidentReport->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group {{ $errors->has('location') ? 'has-error' : '' }}">
@@ -103,23 +103,19 @@
     var uploadedPhotosMap = {}
 Dropzone.options.photosDropzone = {
     url: '{{ route('admin.my-incident-reports.storeMedia') }}',
-    maxFilesize: 4, // MB
-    acceptedFiles: '.jpeg,.jpg,.png,.gif',
+    maxFilesize: 2, // MB
     addRemoveLinks: true,
     headers: {
       'X-CSRF-TOKEN': "{{ csrf_token() }}"
     },
     params: {
-      size: 4,
-      width: 4096,
-      height: 4096
+      size: 2
     },
     success: function (file, response) {
       $('form').append('<input type="hidden" name="photos[]" value="' + response.name + '">')
       uploadedPhotosMap[file.name] = response.name
     },
     removedfile: function (file) {
-      console.log(file)
       file.previewElement.remove()
       var name = ''
       if (typeof file.file_name !== 'undefined') {
@@ -131,70 +127,13 @@ Dropzone.options.photosDropzone = {
     },
     init: function () {
 @if(isset($incidentReport) && $incidentReport->photos)
-      var files =
-        {!! json_encode($incidentReport->photos) !!}
-          for (var i in files) {
-          var file = files[i]
-          this.options.addedfile.call(this, file)
-          this.options.thumbnail.call(this, file, file.url)
-          file.previewElement.classList.add('dz-complete')
-          $('form').append('<input type="hidden" name="photos[]" value="' + file.file_name + '">')
-        }
-@endif
-    },
-     error: function (file, response) {
-         if ($.type(response) === 'string') {
-             var message = response //dropzone sends it's own error messages in string
-         } else {
-             var message = response.errors.file
-         }
-         file.previewElement.classList.add('dz-error')
-         _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
-         _results = []
-         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-             node = _ref[_i]
-             _results.push(node.textContent = message)
-         }
-
-         return _results
-     }
-}
-</script>
-<script>
-    var uploadedUploadFileMap = {}
-Dropzone.options.uploadFileDropzone = {
-    url: '{{ route('admin.my-incident-reports.storeMedia') }}',
-    maxFilesize: 10, // MB
-    addRemoveLinks: true,
-    headers: {
-      'X-CSRF-TOKEN': "{{ csrf_token() }}"
-    },
-    params: {
-      size: 10
-    },
-    success: function (file, response) {
-      $('form').append('<input type="hidden" name="upload_file[]" value="' + response.name + '">')
-      uploadedUploadFileMap[file.name] = response.name
-    },
-    removedfile: function (file) {
-      file.previewElement.remove()
-      var name = ''
-      if (typeof file.file_name !== 'undefined') {
-        name = file.file_name
-      } else {
-        name = uploadedUploadFileMap[file.name]
-      }
-      $('form').find('input[name="upload_file[]"][value="' + name + '"]').remove()
-    },
-    init: function () {
-@if(isset($incidentReport) && $incidentReport->upload_file)
           var files =
-            {!! json_encode($incidentReport->upload_file) !!}
+            {!! json_encode($incidentReport->photos) !!}
               for (var i in files) {
               var file = files[i]
               this.options.addedfile.call(this, file)
               file.previewElement.classList.add('dz-complete')
-              $('form').append('<input type="hidden" name="upload_file[]" value="' + file.file_name + '">')
+              $('form').append('<input type="hidden" name="photos[]" value="' + file.file_name + '">')
             }
 @endif
     },

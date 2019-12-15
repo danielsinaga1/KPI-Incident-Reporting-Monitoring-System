@@ -23,6 +23,14 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                        <th>
+                                            {{ trans('cruds.myIncidentReport.fields.no_laporan') }}
+                                        </th>
+                                        <td>
+                                            {{ $incidentReport->no_laporan }}
+                                        </td>
+                                    </tr>
+                                <tr>
                                     <th>
                                         {{ trans('cruds.taskIncidentReport.fields.nama_pelapor') }}
                                     </th>
@@ -55,6 +63,19 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                        <th>
+                                            {{ trans('cruds.myIncidentReport.fields.photos') }}
+                                        </th>
+                                        <td>
+                                            @foreach($incidentReport->photos as $key => $media)
+                                                <a href="{{ $media->getUrl() }}" target="_blank">
+                                                    <img src="{{ $media->getUrl('thumb') }}" width="50px" height="50px">
+                                                </a>
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                <tr>
+                                <tr>
                                     <th>
                                         {{ trans('cruds.taskIncidentReport.fields.root_cause') }}
                                     </th>
@@ -83,7 +104,15 @@
                                         {{ trans('cruds.taskIncidentReport.fields.result') }}
                                     </th>
                                     <td>
-                                        {{ $incidentReport->result->name ?? '' }}
+                                        @if($incidentReport->result->id == 3)
+                                          <span class="label label-warning">Pending</span>
+                                        @elseif($incidentReport->result->id == 1)
+                                          <span class="label label-danger">Rejected</span>
+                                        @elseif($incidentReport->result->id == 2)
+                                          <span class="label label-success">Approved</span>
+                                        @endif
+
+                                        {{-- {{ $incidentReport->result->name ?? '' }} --}}
                                     </td>
                                 </tr>
                                 <tr>
