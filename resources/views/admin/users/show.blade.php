@@ -24,6 +24,14 @@
                                 </tr>
                                 <tr>
                                     <th>
+                                        {{ trans('cruds.user.fields.npk') }}
+                                    </th>
+                                    <td>
+                                        {{ $user->npk }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
                                         {{ trans('cruds.user.fields.name') }}
                                     </th>
                                     <td>

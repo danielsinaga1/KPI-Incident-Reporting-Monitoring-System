@@ -14,6 +14,18 @@
                     <form action="{{ route("admin.users.update", [$user->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+                        <div class="form-group {{ $errors->has('npk') ? 'has-error' : '' }}">
+                            <label for="npk">{{ trans('cruds.user.fields.npk') }}*</label>
+                            <input type="text" id="npk" name="npk" class="form-control" value="{{ old('name', isset($user) ? $user->npk : '') }}" required>
+                            @if($errors->has('npk'))
+                                <p class="help-block">
+                                    {{ $errors->first('npk') }}
+                                </p>
+                            @endif
+                            <p class="helper-block">
+                                {{ trans('cruds.user.fields.npk_helper') }}
+                            </p>
+                        </div>
                         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                             <label for="name">{{ trans('cruds.user.fields.name') }}*</label>
                             <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($user) ? $user->name : '') }}" required>

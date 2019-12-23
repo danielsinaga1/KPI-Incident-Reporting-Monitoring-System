@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Symfony\Component\HttpFoundation\Response;
+use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateTaskIncidentReportRequest extends FormRequest

@@ -153,14 +153,30 @@
                         </a>
                     </div>
 
-                    @if (auth()->user()->isSupervisor() || auth()->user()->isAdmin() && $incidentReport->result_id == 1 && $incidentReport == 2)
+                    @if (auth()->user()->isSupervisor() || auth()->user()->isAdmin())
                     <div class="panel-footer">
-                        {{-- <form id="approve-incidentReports-{{$incidentReport->id}}" action="{{route('admin.my-incident-reports.approve',$incidentReport->id)}}" method="POST">
-                            @csrf --}}
-                        {{-- <button type="button" class="btn btn-success btn-approve" onclick="return confirm('Are you sure want to approve Incident Report?')">Approve</button> --}}
-                        <a href="{{ route('admin.my-incident-reports.approve' , $incidentReport->id) }}" class="btn btn-success">Approve</a>
-                        <button type="button" class="btn btn-danger btn-reject" onclick="return confirm('Are you sure want to reject Incident Report?')" value="2">Reject</button>
-                        
+                        <a href="{{ route('admin.my-incident-reports.approve2' , $incidentReport->id) }}"
+                            class="btn btn-success">Approve</a>
+                        <button type="button" class="btn btn-danger btn-reject"
+                            onclick="return confirm('Are you sure want to reject Incident Report?')"
+                            value="2">Reject</button>
+                        <button class="btn btn-warning btn-approve">Approve 1</button>
+                        <div class="pull-right">
+                            <a class="btn btn-default" href="{{ url()->previous() }}">
+                                {{ trans('global.back_to_list') }}
+                            </a>
+                        </div>
+                    </div>
+                    @endif
+
+                    @if (auth()->user()->isManager() || auth()->user()->isAdmin())
+                    <div class="panel-footer">
+                        <a href="{{ route('admin.my-incident-reports.approveByManager' , $incidentReport->id) }}"
+                            class="btn btn-success">Approve</a>
+                        <button type="button" class="btn btn-danger btn-reject"
+                            onclick="return confirm('Are you sure want to reject Incident Report?')"
+                            value="2">Reject</button>
+                        <button class="btn btn-warning btn-approve">Approve 1</button>
                         <div class="pull-right">
                             <a class="btn btn-default" href="{{ url()->previous() }}">
                                 {{ trans('global.back_to_list') }}
@@ -176,49 +192,26 @@
     </div>
 </div>
 @endsection
-{{-- @section('scripts')
+@section('scripts')
 @parent
 <script>
-    // function approve(id) {
-    //     $.ajax({
-    //         url : "{{ route('admin.my-incident-reports.approve') }}",
-    //         type : 'POST',
-    //         dataType: 'json',
-    //         data: {
-    //         'id': id,
-    //     },
-    //     beforeSend: function(){
-    //     },
-    //     complete: function(){
-    //     },
-    //     success: function(resp) {
-    //         console.log(resp);
-    //     }
-    //     })
-    // }
+$('.btn-approve').click(function (event) {
+        event.preventDefault();
 
- $('.btn-approve').click(function(e) {
-    let deleteButtonTrans = '{{ trans('global.approve_ir') }}';
-       e.preventDefault();
+        $.ajax({
+            headers: {'x-csrf-token': _token},
+            method: 'POST',
+            // url: "{{ route('admin.my-incident-reports.approve', ['incidentReport_id' => $incidentReport->id]) }}",
+            url: "{{ route('admin.my-incident-reports.approve1', ['incidentReport_id' => $incidentReport->id]) }}",
+            data: {
+                'id': {{ $incidentReport->id }},
+            },
+            success: function (data) {
+                alert('success');
+            }
 
-    /*Ajax Request Header setup*/
-    $.ajaxSetup({
-        headers: 'X-CSRF-TOKEN' : $
-    })
+        });
+    });
 
-     $.ajax({
-        url : "{{ route('admin.my-incident-reports.approve') }}",
-        method : 'POST',
-        dataType: 'json',
-        data: {
-            'id': id,
-        },
-        success: function (data) {
-            alert('success');
-        },
-        error: function (data) {
-            alert(data);
-        }
-     })
- })
-</script> --}}
+</script>
+@endsection

@@ -63,6 +63,20 @@
                                 {{ trans('cruds.taskIncidentReport.fields.perbaikan_helper') }}
                             </p>
                         </div>
+
+                        <div class="form-group {{ $errors->has('date_dept_action') ? 'has-error' : '' }}">
+                            <label for="date_dept_action">{{ trans('cruds.taskIncidentReport.fields.date_dept_action') }}*</label>
+                            <input type="text" id="date_dept_action" name="date_dept_action" class="form-control datetime" value="{{ old('date_dept_action', isset($incidentReport) ? $incidentReport->date_dept_action : '') }}" required>
+                            @if($errors->has('date_dept_action'))
+                                <p class="help-block">
+                                    {{ $errors->first('date_dept_action') }}
+                                </p>
+                            @endif
+                            <p class="helper-block">
+                                {{ trans('cruds.taskIncidentReport.fields.date_incident_helper') }}
+                            </p>
+                        </div>
+
                         <div class="form-group {{ $errors->has('pencegahan') ? 'has-error' : '' }}">
                             <label for="pencegahan">{{ trans('cruds.taskIncidentReport.fields.pencegahan') }}*</label>
                             <input type="text" id="pencegahan" name="pencegahan" class="form-control" value="{{ old('pencegahan', isset($incidentReport) ? $incidentReport->pencegahan : '') }}" required>

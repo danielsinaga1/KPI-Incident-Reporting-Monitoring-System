@@ -47,6 +47,8 @@ return [
             'id_helper'                => '',
             'name'                     => 'Name',
             'name_helper'              => '',
+            'npk'                      => 'NPK',
+            'npk_helper'               => '',
             'email'                    => 'Email',
             'email_helper'             => '',
             'email_verified_at'        => 'Email verified at',

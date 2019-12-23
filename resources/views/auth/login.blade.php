@@ -19,7 +19,7 @@
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
-
+{{-- 
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                 <input id="email" type="email" name="email" class="form-control" required autocomplete="email" autofocus placeholder="{{ trans('global.login_email') }}" value="{{ old('email', null) }}">
 
@@ -28,7 +28,18 @@
                         {{ $errors->first('email') }}
                     </p>
                 @endif
+            </div> --}}
+
+            <div class="form-group{{ $errors->has('npk') ? ' has-error' : '' }}">
+                <input id="npk" type="npk" name="npk" class="form-control" required autocomplete="email" autofocus placeholder="{{ trans('global.login_npk') }}" value="{{ old('npk', null) }}">
+
+                @if($errors->has('npk'))
+                    <p class="help-block">
+                        {{ $errors->first('npk') }}
+                    </p>
+                @endif
             </div>
+
             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                 <input id="password" type="password" name="password" class="form-control" required placeholder="{{ trans('global.login_password') }}">
 

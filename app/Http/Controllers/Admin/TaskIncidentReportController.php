@@ -24,7 +24,7 @@ class TaskIncidentReportController extends Controller
     public function index(Request $request)
     {
         $authTeamId = auth()->user()->team_id;
-        $data2 = IncidentReport::where('dept_designated_id', $authTeamId)->with('dept_designation')->get();
+        $data2 = IncidentReport::where('dept_designated_id', $authTeamId)->whereNotNull('acknowledge_by_id')->with('dept_designation')->get();
         // dd($request);
         if ($request->ajax()) {
             $query = IncidentReport::with(['nama_pelapor', 'dept_origin', 'root_cause', 'dept_designation', 'action_by', 'reviewed_by', 'acknowledge_by', 'team']);
@@ -283,4 +283,13 @@ class TaskIncidentReportController extends Controller
         }
     }
 
+    public function actionByuser(IncidentReport $incidentReport) {
+
+        $incidentReport->action_by_id = auth()->user()->id;
+        $incidentReport->update();
+        // $incidentReport->update(['result_id' => 1,
+        // 'reviewed_by_id' => auth()->user()->id
+        // ]);
+        return redirect()->route('admin.task-incident-reports.index');
+    }
 }

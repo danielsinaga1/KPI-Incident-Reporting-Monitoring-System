@@ -16,11 +16,21 @@
     
     @yield('styles')
 </head>
-
+<style type="text/css">
+    .login-page {
+        background: url('img/incident.jpg');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+        width: 100%;
+    }
+</style>
 <body class="hold-transition login-page">
     @yield('content')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
+    
     @yield('scripts')
 </body>
 

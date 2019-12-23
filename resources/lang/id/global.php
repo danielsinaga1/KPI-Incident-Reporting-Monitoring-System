@@ -19,6 +19,7 @@ return [
     'list'                                 => 'Daftar',
     'login'                                => 'Login',
     'login_email'                          => 'Email',
+    'login_npk'                            => 'NPK',
     'login_password'                       => 'Kata Sandi',
     'login_password_confirmation'          => 'Password baru lagi',
     'logout'                               => 'Keluar',

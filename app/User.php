@@ -35,6 +35,7 @@ class User extends Authenticatable
         'name',
         'email',
         'team_id',
+        'npk',
         'role_id',
         'password',
         'created_at',

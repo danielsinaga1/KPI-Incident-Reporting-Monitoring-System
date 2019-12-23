@@ -95,11 +95,20 @@ class IncidentReport extends Model implements HasMedia
         return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
     }
 
+    public function setDateDeptActionAttribute($value)
+    {
+        $this->attributes['date_dept_action'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
+    }
+    
+    public function getDateDeptActionAttribute($value)
+    {
+        return $value ? Carbon::createFromFormat('Y-m-d H:i:s', $value)->format(config('panel.date_format') . ' ' . config('panel.time_format')) : null;
+    }
+
     public function setDateIncidentAttribute($value)
     {
         $this->attributes['date_incident'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
     }
-    
     public function registerMediaConversions(Media $media = null){
         $this->addMediaConversion('thumb')->width(50)->height(50);
         // $this->addMediaConversion('big_thumb')->width(50)->height(50);
@@ -131,15 +140,15 @@ class IncidentReport extends Model implements HasMedia
 
     //     return $files;
     // }
-    public function getDateDeptActionAttribute($value)
-    {
-        return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
-    }
+    // public function getDateDeptActionAttribute($value)
+    // {
+    //     return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
+    // }
 
-    public function setDateDeptActionAttribute($value)
-    {
-        $this->attributes['date_dept_action'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
-    }
+    // public function setDateDeptActionAttribute($value)
+    // {
+    //     $this->attributes['date_dept_action'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;
+    // }
 
     public static function getNextNumberReport(){
         $year = Carbon::now()->format('y');

@@ -72,10 +72,23 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // My Incident Reports
     Route::delete('my-incident-reports/destroy', 'MyIncidentReportController@massDestroy')->name('my-incident-reports.massDestroy');
     Route::post('my-incident-reports/media', 'MyIncidentReportController@storeMedia')->name('my-incident-reports.storeMedia');
+
+    #ini Fix (coba 1)
     Route::get('my-incident-reports/{incidentReport_id}/approve',  'MyIncidentReportController@approve')->name('my-incident-reports.approve');
+    
+    #coba 2
+    Route::get('my-incident-reports/{my_incident_report}/approve2',  'MyIncidentReportController@approveByAdmin')->name('my-incident-reports.approve2');
+    
+    #ini untuk Manager()
+    #coba 2
+    Route::get('my-incident-reports/{my_incident_report}/approveByManager',  'MyIncidentReportController@approveByManager')->name('my-incident-reports.approveByManager');
+
+    
+    Route::post('my-incident-reports/approve1/{id}',  'MyIncidentReportController@approve1')->name('my-incident-reports.approve1');
     Route::resource('my-incident-reports', 'MyIncidentReportController');
 
     // Task Incident Reports
+    Route::get('task-incident-reports/{task_incident_report}/actionByuser',  'TaskIncidentReportController@actionByuser')->name('task-incident-reports.actionByuser');
     Route::delete('task-incident-reports/destroy', 'TaskIncidentReportController@massDestroy')->name('task-incident-reports.massDestroy');
     Route::resource('task-incident-reports', 'TaskIncidentReportController');
     

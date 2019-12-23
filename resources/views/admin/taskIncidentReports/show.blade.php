@@ -24,7 +24,7 @@
                                 </tr>
                                 <tr>
                                         <th>
-                                            {{ trans('cruds.myIncidentReport.fields.no_laporan') }}
+                                            {{ trans('cruds.taskIncidentReport.fields.no_laporan') }}
                                         </th>
                                         <td>
                                             {{ $incidentReport->no_laporan }}
@@ -64,7 +64,7 @@
                                 </tr>
                                 <tr>
                                         <th>
-                                            {{ trans('cruds.myIncidentReport.fields.photos') }}
+                                            {{ trans('cruds.taskIncidentReport.fields.photos') }}
                                         </th>
                                         <td>
                                             @foreach($incidentReport->photos as $key => $media)
@@ -107,9 +107,9 @@
                                         @if($incidentReport->result->id == 3)
                                           <span class="label label-warning">Pending</span>
                                         @elseif($incidentReport->result->id == 1)
-                                          <span class="label label-danger">Rejected</span>
-                                        @elseif($incidentReport->result->id == 2)
                                           <span class="label label-success">Approved</span>
+                                        @elseif($incidentReport->result->id == 2)
+                                          <span class="label label-danger">Rejected</span>
                                         @endif
 
                                         {{-- {{ $incidentReport->result->name ?? '' }} --}}
@@ -154,6 +154,16 @@
                         </a>
                     </div>
 
+
+                    <div class="panel-footer">
+                        <a href="{{ route('admin.task-incident-reports.actionByuser' , $incidentReport->id) }}"
+                            class="btn btn-success">Done</a>
+                        <div class="pull-right">
+                            <a class="btn btn-default" href="{{ url()->previous() }}">
+                                {{ trans('global.back_to_list') }}
+                            </a>
+                        </div>
+                    </div>
 
                 </div>
             </div>
