@@ -11,7 +11,7 @@
             {{ trans('global.reset_password') }}
         </p>
 
-        <form method="POST" action="{{ route('password.request') }}">
+        <form method="POST" action="{{ route('admin.password.request') }}">
             @csrf
 
             <input type="hidden" name="token" value="{{ $token }}">

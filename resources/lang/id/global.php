@@ -26,6 +26,7 @@ return [
     'month'                                => 'Bulan',
     'no'                                   => 'TIdak',
     'pleaseSelect'                         => 'Silahkan pilih',
+    'password_confirmation'                => 'Konfirmasi Password',
     'register'                             => 'Daftar',
     'remember_me'                          => 'Ingat Saya',
     'reset_password'                       => 'Reset kata sandi',

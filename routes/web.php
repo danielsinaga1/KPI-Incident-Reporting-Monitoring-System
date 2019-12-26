@@ -92,4 +92,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('task-incident-reports/destroy', 'TaskIncidentReportController@massDestroy')->name('task-incident-reports.massDestroy');
     Route::resource('task-incident-reports', 'TaskIncidentReportController');
     
+    //Profiles
+    Route::resource('profiles','ProfileController');
+    Route::patch('profiles/{id}', 'ProfileController@update');
+ 
+    // Route::post('profiles/{users}/profile', 'ProfileController@update')->name();
+
+    Route::post('postChangePassword','ProfileController@postChangePassword')->name('postChangePassword');
+    Route::post('changePassword','ProfileController@changePassword2')->name('changePassword');
+    Route::post('updatePassword','ProfileController@updatePassword')->name('updatePassword');
+
 });
