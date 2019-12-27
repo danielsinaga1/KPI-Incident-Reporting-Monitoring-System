@@ -141,6 +141,22 @@ return [
             'team_helper'        => '',
         ],
     ],
+    'categoryIncident'      => [
+        'title'          => 'Category Incidents',
+        'title_singular' => 'Category Incident',
+        'fields'         => [
+            'id'                 => 'ID',
+            'id_helper'          => '',
+            'name'               => 'Name',
+            'name_helper'        => '',
+            'created_at'         => 'Created at',
+            'created_at_helper'  => '',
+            'updated_at'         => 'Updated at',
+            'updated_at_helper'  => '',
+            'deleted_at'         => 'Deleted at',
+            'deleted_at_helper'  => '',
+        ],
+    ],
     'assetManagement'       => [
         'title'          => 'Asset management',
         'title_singular' => 'Asset management',

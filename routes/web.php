@@ -29,6 +29,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('incident-reports/destroy', 'IncidentReportController@massDestroy')->name('incident-reports.massDestroy');
     Route::resource('incident-reports', 'IncidentReportController');
 
+    // Classification Incidents
+    Route::delete('category-incidents/destroy', 'CategoryIncidentController@massDestroy')->name('category-incidents.massDestroy');
+    Route::resource('category-incidents', 'CategoryIncidentController');
+
     // Category Incidents
     Route::delete('classification-incidents/destroy', 'ClassificationIncidentController@massDestroy')->name('classification-incidents.massDestroy');
     Route::resource('classification-incidents', 'ClassificationIncidentController');
