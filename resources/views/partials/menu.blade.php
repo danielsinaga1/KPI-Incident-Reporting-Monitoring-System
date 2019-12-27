@@ -82,16 +82,17 @@
                                 </a>
                             </li>
                         @endcan
-                        @can('category_incident_access')
-                            <li class="{{ request()->is('admin/category-incidents') || request()->is('admin/category-incidents/*') ? 'active' : '' }}">
-                                <a href="{{ route("admin.category-incidents.index") }}">
+                        @can('classification_incident_access')
+                            <li class="{{ request()->is('admin/classification-incidents') || request()->is('admin/classification-incidents/*') ? 'active' : '' }}">
+                                <a href="{{ route("admin.classification-incidents.index") }}">
                                     <i class="fa-fw fas fa-clipboard-list">
 
                                     </i>
-                                    <span>{{ trans('cruds.categoryIncident.title') }}</span>
+                                    <span>{{ trans('cruds.classificationIncident.title') }}</span>
                                 </a>
                             </li>
                         @endcan
+                      
                         @can('root_cause_access')
                             <li class="{{ request()->is('admin/root-causes') || request()->is('admin/root-causes/*') ? 'active' : '' }}">
                                 <a href="{{ route("admin.root-causes.index") }}">

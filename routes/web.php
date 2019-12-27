@@ -30,8 +30,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('incident-reports', 'IncidentReportController');
 
     // Category Incidents
-    Route::delete('category-incidents/destroy', 'CategoryIncidentController@massDestroy')->name('category-incidents.massDestroy');
-    Route::resource('category-incidents', 'CategoryIncidentController');
+    Route::delete('classification-incidents/destroy', 'ClassificationIncidentController@massDestroy')->name('classification-incidents.massDestroy');
+    Route::resource('classification-incidents', 'ClassificationIncidentController');
 
     // Asset Categories
     Route::delete('asset-categories/destroy', 'AssetCategoryController@massDestroy')->name('asset-categories.massDestroy');

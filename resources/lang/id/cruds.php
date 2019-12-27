@@ -111,7 +111,7 @@ return [
             'root_cause_helper'        => '',
         ],
     ],
-    'categoryIncident'      => [
+    'classificationIncident'      => [
         'title'          => 'Classification Incidents',
         'title_singular' => 'Classification Incident',
         'fields'         => [

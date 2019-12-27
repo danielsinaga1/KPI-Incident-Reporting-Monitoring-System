@@ -4,7 +4,7 @@ namespace App\Http\Resources\Admin;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CategoryIncidentResource extends JsonResource
+class ClassificationIncidentResource extends JsonResource
 {
     public function toArray($request)
     {

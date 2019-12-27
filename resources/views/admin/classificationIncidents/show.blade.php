@@ -7,7 +7,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ trans('global.show') }} {{ trans('cruds.categoryIncident.title') }}
+                    {{ trans('global.show') }} {{ trans('cruds.classificationIncident.title') }}
                 </div>
                 <div class="panel-body">
 
@@ -16,42 +16,42 @@
                             <tbody>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.categoryIncident.fields.id') }}
+                                        {{ trans('cruds.classificationIncident.fields.id') }}
                                     </th>
                                     <td>
-                                        {{ $categoryIncident->id }}
+                                        {{ $classificationIncident->id }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.categoryIncident.fields.name') }}
+                                        {{ trans('cruds.classificationIncident.fields.name') }}
                                     </th>
                                     <td>
-                                        {{ $categoryIncident->name }}
+                                        {{ $classificationIncident->name }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.categoryIncident.fields.code') }}
+                                        {{ trans('cruds.classificationIncident.fields.code') }}
                                     </th>
                                     <td>
-                                        {{ $categoryIncident->code }}
+                                        {{ $classificationIncident->code }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.categoryIncident.fields.type') }}
+                                        {{ trans('cruds.classificationIncident.fields.type') }}
                                     </th>
                                     <td>
-                                        {{ $categoryIncident->type }}
+                                        {{ $classificationIncident->type }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.categoryIncident.fields.description') }}
+                                        {{ trans('cruds.classificationIncident.fields.description') }}
                                     </th>
                                     <td>
-                                        {!! $categoryIncident->description !!}
+                                        {!! $classificationIncident->description !!}
                                     </td>
                                 </tr>
                             </tbody>

@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('content')
 <div class="content">
-    @can('category_incident_create')
+    @can('classification_incident_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route("admin.category-incidents.create") }}">
-                    {{ trans('global.add') }} {{ trans('cruds.categoryIncident.title_singular') }}
+                <a class="btn btn-success" href="{{ route("admin.classification-incidents.create") }}">
+                    {{ trans('global.add') }} {{ trans('cruds.classificationIncident.title_singular') }}
                 </a>
             </div>
         </div>
@@ -15,28 +15,28 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ trans('cruds.categoryIncident.title_singular') }} {{ trans('global.list') }}
+                    {{ trans('cruds.classificationIncident.title_singular') }} {{ trans('global.list') }}
                 </div>
                 <div class="panel-body">
 
                     <div class="table-responsive">
-                        <table class=" table table-bordered table-striped table-hover datatable datatable-CategoryIncident">
+                        <table class=" table table-bordered table-striped table-hover datatable datatable-ClassificationIncident">
                             <thead>
                                 <tr>
                                     <th width="10">
 
                                     </th>
                                     <th>
-                                        {{ trans('cruds.categoryIncident.fields.id') }}
+                                        {{ trans('cruds.classificationIncident.fields.id') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.categoryIncident.fields.name') }}
+                                        {{ trans('cruds.classificationIncident.fields.name') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.categoryIncident.fields.code') }}
+                                        {{ trans('cruds.classificationIncident.fields.code') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.categoryIncident.fields.type') }}
+                                        {{ trans('cruds.classificationIncident.fields.type') }}
                                     </th>
                                     <th>
                                         &nbsp;
@@ -44,41 +44,41 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($categoryIncidents as $key => $categoryIncident)
-                                    <tr data-entry-id="{{ $categoryIncident->id }}">
+                                @foreach($classificationIncidents as $key => $classificationIncident)
+                                    <tr data-entry-id="{{ $classificationIncident->id }}">
                                         <td>
 
                                         </td>
                                         <td>
-                                            {{ $categoryIncident->id ?? '' }}
+                                            {{ $classificationIncident->id ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $categoryIncident->name ?? '' }}
+                                            {{ $classificationIncident->name ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $categoryIncident->code ?? '' }}
+                                            {{ $classificationIncident->code ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $categoryIncident->type ?? '' }}
+                                            {{ $classificationIncident->type ?? '' }}
                                         </td>
                                         <td>
-                                            {{ $categoryIncident->description ?? '' }}
+                                            {{ $classificationIncident->description ?? '' }}
                                         </td>
                                         <td>
-                                            @can('category_incident_show')
-                                                <a class="btn btn-xs btn-primary" href="{{ route('admin.category-incidents.show', $categoryIncident->id) }}">
+                                            @can('classification_incident_show')
+                                                <a class="btn btn-xs btn-primary" href="{{ route('admin.classification-incidents.show', $classificationIncident->id) }}">
                                                     {{ trans('global.view') }}
                                                 </a>
                                             @endcan
 
-                                            @can('category_incident_edit')
-                                                <a class="btn btn-xs btn-info" href="{{ route('admin.category-incidents.edit', $categoryIncident->id) }}">
+                                            @can('classification_incident_edit')
+                                                <a class="btn btn-xs btn-info" href="{{ route('admin.classification-incidents.edit', $classificationIncident->id) }}">
                                                     {{ trans('global.edit') }}
                                                 </a>
                                             @endcan
 
-                                            @can('category_incident_delete')
-                                                <form action="{{ route('admin.category-incidents.destroy', $categoryIncident->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                            @can('classification_incident_delete')
+                                                <form action="{{ route('admin.classification-incidents.destroy', $classificationIncident->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                     <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -106,11 +106,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('category_incident_delete')
+@can('classification_incident_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.category-incidents.massDestroy') }}",
+    url: "{{ route('admin.classification-incidents.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -140,7 +140,7 @@
     order: [[ 1, 'asc' ]],
     pageLength: 100,
   });
-  $('.datatable-CategoryIncident:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  $('.datatable-ClassificationIncident:not(.ajaxTable)').DataTable({ buttons: dtButtons })
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
         $($.fn.dataTable.tables(true)).DataTable()
             .columns.adjust();

@@ -2,16 +2,16 @@
 
 namespace App\Http\Requests;
 
-use App\CategoryIncident;
+use App\ClassificationIncident;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
 
-class MassDestroyCategoryIncidentRequest extends FormRequest
+class MassDestroyClassificationIncidentRequest extends FormRequest
 {
     public function authorize()
     {
-        abort_if(Gate::denies('category_incident_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('classification_incident_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return true;
     }
@@ -20,7 +20,7 @@ class MassDestroyCategoryIncidentRequest extends FormRequest
     {
         return [
             'ids'   => 'required|array',
-            'ids.*' => 'exists:category_incidents,id',
+            'ids.*' => 'exists:classification_incidents,id',
         ];
     }
 }
