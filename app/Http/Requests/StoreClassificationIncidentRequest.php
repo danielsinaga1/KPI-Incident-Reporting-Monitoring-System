@@ -25,12 +25,6 @@ class StoreClassificationIncidentRequest extends FormRequest
             'code'        => [
                 'required',
             ],
-            'type'        => [
-                'required',
-            ],
-            'description' => [
-                'required',
-            ],
         ];
     }
 }

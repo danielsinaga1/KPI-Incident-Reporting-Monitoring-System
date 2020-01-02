@@ -20,7 +20,7 @@ class MassDestroyClassificationIncidentRequest extends FormRequest
     {
         return [
             'ids'   => 'required|array',
-            'ids.*' => 'exists:classification_incidents,id',
+            'ids.*' => 'exists:classify_incidents,id',
         ];
     }
 }

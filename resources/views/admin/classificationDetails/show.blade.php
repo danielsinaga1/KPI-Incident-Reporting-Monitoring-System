@@ -7,7 +7,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ trans('global.show') }} {{ trans('cruds.classificationIncident.title') }}
+                    {{ trans('global.show') }} {{ trans('cruds.classificationDetail.title') }}
                 </div>
                 <div class="panel-body">
 
@@ -16,26 +16,34 @@
                             <tbody>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.classificationIncident.fields.id') }}
+                                        {{ trans('cruds.classificationDetail.fields.id') }}
                                     </th>
                                     <td>
-                                        {{ $classificationIncident->id }}
+                                        {{ $classificationDetail->id }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.classificationIncident.fields.name') }}
+                                        {{ trans('cruds.classificationDetail.fields.name') }}
                                     </th>
                                     <td>
-                                        {{ $classificationIncident->name }}
+                                        {{ $classificationDetail->classify_incident->name }}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.classificationIncident.fields.code') }}
+                                        {{ trans('cruds.classificationDetail.fields.category') }}
                                     </th>
                                     <td>
-                                        {{ $classificationIncident->code }}
+                                        {{ $classificationDetail->category_incident->name }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        {{ trans('cruds.classificationDetail.fields.description') }}
+                                    </th>
+                                    <td>
+                                        {!! $classificationDetail->description !!}
                                     </td>
                                 </tr>
                             </tbody>

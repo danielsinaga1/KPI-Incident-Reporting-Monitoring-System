@@ -117,17 +117,16 @@ return [
             'root_cause_helper'        => '',
         ],
     ],
-    'classificationIncident'      => [
-        'title'          => 'Classification Incidents',
-        'title_singular' => 'Classification Incident',
+
+    'classificationDetail'      => [
+        'title'          => 'Classification Details',
+        'title_singular' => 'Classification Detail',
         'fields'         => [
             'id'                 => 'ID',
             'id_helper'          => '',
             'name'               => 'Name',
             'name_helper'        => '',
-            'code'               => 'Classification code',
-            'code_helper'        => '',
-            'type'               => 'Type',
+            'category'           => 'Category',
             'type_helper'        => '',
             'description'        => 'Description',
             'description_helper' => '',
@@ -137,10 +136,28 @@ return [
             'updated_at_helper'  => '',
             'deleted_at'         => 'Deleted at',
             'deleted_at_helper'  => '',
-            'team'               => 'Team',
-            'team_helper'        => '',
         ],
     ],
+
+    'classificationIncident'      => [
+        'title'          => 'Classification Incidents',
+        'title_singular' => 'Classification Incident',
+        'fields'         => [
+            'id'                 => 'ID',
+            'id_helper'          => '',
+            'name'               => 'Name',
+            'name_helper'        => '',
+            'code'               => 'Code',
+            'code_helper'        => '',
+            'created_at'         => 'Created at',
+            'created_at_helper'  => '',
+            'updated_at'         => 'Updated at',
+            'updated_at_helper'  => '',
+            'deleted_at'         => 'Deleted at',
+            'deleted_at_helper'  => '',
+        ],
+    ],
+    
     'categoryIncident'      => [
         'title'          => 'Category Incidents',
         'title_singular' => 'Category Incident',

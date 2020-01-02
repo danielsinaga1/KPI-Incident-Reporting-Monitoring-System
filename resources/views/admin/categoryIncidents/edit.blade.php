@@ -15,15 +15,15 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                            <label for="name">{{ trans('cruds.classificationIncident.fields.name') }}*</label>
-                            <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($classificationIncident) ? $classificationIncident->name : '') }}" required>
+                            <label for="name">{{ trans('cruds.categoryIncident.fields.name') }}*</label>
+                            <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($categoryIncident) ? $categoryIncident->name : '') }}" required>
                             @if($errors->has('name'))
                                 <p class="help-block">
                                     {{ $errors->first('name') }}
                                 </p>
                             @endif
                             <p class="helper-block">
-                                {{ trans('cruds.classificationIncident.fields.name_helper') }}
+                                {{ trans('cruds.categoryIncident.fields.name_helper') }}
                             </p>
                         </div>
                         

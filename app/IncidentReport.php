@@ -83,7 +83,7 @@ class IncidentReport extends Model implements HasMedia
 
     public function result()
     {
-        return $this->belongsTo(Result::class, 'result_id');
+        return $this->belongsTow(Result::class, 'result_id');
     }
 
     public function root_cause()

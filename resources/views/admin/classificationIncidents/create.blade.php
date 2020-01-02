@@ -15,7 +15,7 @@
                         @csrf
                         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                             <label for="name">{{ trans('cruds.classificationIncident.fields.name') }}*</label>
-                            <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($classificationIncident) ? $classificationIncident->name : '') }}" required>
+                            <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($classifyIncident) ? $classifyIncident->name : '') }}" required>
                             @if($errors->has('name'))
                                 <p class="help-block">
                                     {{ $errors->first('name') }}
@@ -27,7 +27,7 @@
                         </div>
                         <div class="form-group {{ $errors->has('code') ? 'has-error' : '' }}">
                             <label for="code">{{ trans('cruds.classificationIncident.fields.code') }}*</label>
-                            <input type="text" id="code" name="code" class="form-control" value="{{ old('code', isset($classificationIncident) ? $classificationIncident->code : '') }}" required>
+                            <input type="text" id="code" name="code" class="form-control" value="{{ old('code', isset($classifyIncident) ? $classifyIncident->code : '') }}" required>
                             @if($errors->has('code'))
                                 <p class="help-block">
                                     {{ $errors->first('code') }}
@@ -35,30 +35,6 @@
                             @endif
                             <p class="helper-block">
                                 {{ trans('cruds.classificationIncident.fields.code_helper') }}
-                            </p>
-                        </div>
-                        <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
-                            <label for="type">{{ trans('cruds.classificationIncident.fields.type') }}*</label>
-                            <input type="text" id="type" name="type" class="form-control" value="{{ old('type', isset($classificationIncident) ? $classificationIncident->type : '') }}" required>
-                            @if($errors->has('type'))
-                                <p class="help-block">
-                                    {{ $errors->first('type') }}
-                                </p>
-                            @endif
-                            <p class="helper-block">
-                                {{ trans('cruds.classificationIncident.fields.type_helper') }}
-                            </p>
-                        </div>
-                        <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-                            <label for="description">{{ trans('cruds.classificationIncident.fields.description') }}*</label>
-                            <textarea id="description" name="description" class="form-control ckeditor">{{ old('description', isset($classificationIncident) ? $classificationIncident->description : '') }}</textarea>
-                            @if($errors->has('description'))
-                                <p class="help-block">
-                                    {{ $errors->first('description') }}
-                                </p>
-                            @endif
-                            <p class="helper-block">
-                                {{ trans('cruds.classificationIncident.fields.description_helper') }}
                             </p>
                         </div>
                         <div>

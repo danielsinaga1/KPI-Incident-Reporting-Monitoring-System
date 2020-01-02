@@ -24,7 +24,7 @@
                             <thead>
                                 <tr>
                                     <th width="10">
-
+                                       <input type="checkbox" name="selectAll" />
                                     </th>
                                     <th>
                                         {{ trans('cruds.categoryIncident.fields.id') }}
@@ -41,7 +41,7 @@
                                 @foreach($categoryIncidents as $key => $categoryIncident)
                                     <tr data-entry-id="{{ $categoryIncident->id }}">
                                         <td>
-
+                                                
                                         </td>
                                         <td>
                                             {{ $categoryIncident->id ?? '' }}

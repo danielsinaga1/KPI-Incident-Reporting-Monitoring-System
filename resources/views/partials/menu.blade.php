@@ -82,17 +82,29 @@
                                 </a>
                             </li>
                         @endcan
+
+                        @can('classification_detail_access')
+                        <li class="{{ request()->is('admin/classification-details') || request()->is('admin/classification-details/*') ? 'active' : '' }}">
+                            <a href="{{ route("admin.classification-details.index") }}">
+                                <i class="fa-fw fas fa-bookmark">
+
+                                </i>
+                                <span>{{ trans('cruds.classificationDetail.title') }}</span>
+                            </a>
+                        </li>
+                        @endcan
+
                         @can('classification_incident_access')
                             <li class="{{ request()->is('admin/classification-incidents') || request()->is('admin/classification-incidents/*') ? 'active' : '' }}">
                                 <a href="{{ route("admin.classification-incidents.index") }}">
-                                    <i class="fa-fw fas fa-clipboard-list">
+                                    <i class="fa-fw fas fa-tags">
 
                                     </i>
                                     <span>{{ trans('cruds.classificationIncident.title') }}</span>
                                 </a>
                             </li>
                         @endcan
-                        
+                                                
                         @can('category_incident_access')
                         <li class="{{ request()->is('admin/category-incidents') || request()->is('admin/category-incidents/*') ? 'active' : '' }}">
                             <a href="{{ route("admin.category-incidents.index") }}">

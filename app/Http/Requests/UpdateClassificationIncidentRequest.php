@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\ClassificationIncident;
+use App\ClassificationDetail;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,14 +22,8 @@ class UpdateClassificationIncidentRequest extends FormRequest
             'name'        => [
                 'required',
             ],
-            'code'        => [
-                'required',
-            ],
-            'type'        => [
-                'required',
-            ],
-            'description' => [
-                'required',
+            'name'        => [
+                'code',
             ],
         ];
     }

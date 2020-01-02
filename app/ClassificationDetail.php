@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CategoryIncident extends Model
+class ClassificationDetail extends Model
 {
     use SoftDeletes;
 
-    public $table = 'category_incidents';
+    public $table = 'classify_details';
 
     protected $dates = [
         'created_at',
@@ -22,10 +22,18 @@ class CategoryIncident extends Model
         'created_at',
         'updated_at',
         'deleted_at',
+        'description',
+        'cat_id',
+        'classify_id',
     ];
 
     public function category_incident()
     {
-        return $this->hasMany(CategoryIncident::class, 'cat_id', 'id');
+        return $this->belongsTo(CategoryIncident::class, 'cat_id');
+    }
+
+    public function classify_incident() 
+    {
+        return $this->belongsTo(ClassificationIncident::class, 'classify_id');
     }
 }

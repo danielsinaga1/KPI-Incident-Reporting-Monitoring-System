@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\ClassificationIncident;
+use App\CategoryIncident;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyClassificationIncidentRequest;
 use App\Http\Requests\StoreClassificationIncidentRequest;
@@ -32,8 +33,10 @@ class ClassificationIncidentController extends Controller
     public function create()
     {
         abort_if(Gate::denies('classification_incident_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        
+        $categoryIncidents = CategoryIncident::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.classificationIncidents.create');
+        return view('admin.classificationIncidents.create',compact('categoryIncidents'));
     }
 
     public function store(StoreClassificationIncidentRequest $request)
@@ -47,9 +50,7 @@ class ClassificationIncidentController extends Controller
     {
         abort_if(Gate::denies('classification_incident_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        // $categoryIncident->load('team');
-
-        return view('admin.classificationIncidents.edit', compact('categoryIncident'));
+        return view('admin.classificationIncidents.edit', compact('classificationIncident'));
     }
 
     public function update(UpdateClassificationIncidentRequest $request, ClassificationIncident $classificationIncident)

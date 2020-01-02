@@ -11,7 +11,7 @@
                 </div>
                 <div class="panel-body">
 
-                    <form action="{{ route("admin.classification-incidents.update", [$classificitionIncident->id]) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route("admin.classification-incidents.update", [$classificationIncident->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
@@ -36,30 +36,6 @@
                             @endif
                             <p class="helper-block">
                                 {{ trans('cruds.classificationIncident.fields.code_helper') }}
-                            </p>
-                        </div>
-                        <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
-                            <label for="type">{{ trans('cruds.classificationIncident.fields.type') }}*</label>
-                            <input type="text" id="type" name="type" class="form-control" value="{{ old('type', isset($classificationIncident) ? $classificationIncident->type : '') }}" required>
-                            @if($errors->has('type'))
-                                <p class="help-block">
-                                    {{ $errors->first('type') }}
-                                </p>
-                            @endif
-                            <p class="helper-block">
-                                {{ trans('cruds.classificationIncident.fields.type_helper') }}
-                            </p>
-                        </div>
-                        <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
-                            <label for="description">{{ trans('cruds.classificationIncident.fields.description') }}*</label>
-                            <textarea id="description" name="description" class="form-control ckeditor">{{ old('description', isset($classificationIncident) ? $classificationIncident->description : '') }}</textarea>
-                            @if($errors->has('description'))
-                                <p class="help-block">
-                                    {{ $errors->first('description') }}
-                                </p>
-                            @endif
-                            <p class="helper-block">
-                                {{ trans('cruds.classificationIncident.fields.description_helper') }}
                             </p>
                         </div>
                         <div>
