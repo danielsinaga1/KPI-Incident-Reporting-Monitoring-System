@@ -376,6 +376,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
 <script>
 $(function () {
     let copyButtonTrans = '{{ trans('global.datatables.copy')}}'
@@ -384,6 +385,8 @@ $(function () {
     let pdfButtonTrans = '{{ trans('global.datatables.pdf') }}'
     let printButtonTrans = '{{ trans('global.datatables.print')}}'
     let colvisButtonTrans = '{{ trans('global.datatables.colvis')}}'
+    let selectAllButtonTrans = '{{ trans('global.datatables.selectAll')}}'
+
 
     let languages = {
             'en': 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json',
@@ -397,10 +400,11 @@ $(function () {
                 language: {
                     url: languages['{{ app()->getLocale() }}']
                 },
-            
+    
                 columnDefs: [{
                     orderable: false,
                     className: 'select-checkbox',
+
                     targets: 0
                 }, {
                     className: 'selectAll',
@@ -418,7 +422,15 @@ $(function () {
                 pageLength: 100,
                 dom: 'lBfrtip<"actions">',
                 buttons: [
-                    'selectAll',
+
+                    {
+                        extend: 'selectAll',
+                        className:'btn-primary',
+                        text: selectAllButtonTrans,
+                        exportOptions: {
+                            columns: 'visible'
+                        }
+                    },
                     {
                         extend: 'copy',
                         className: 'btn-default',
@@ -471,6 +483,7 @@ $(function () {
             });
 
             $.fn.dataTable.ext.classes.sPageButton = '';
+
         });
     </script>
     @yield('scripts')

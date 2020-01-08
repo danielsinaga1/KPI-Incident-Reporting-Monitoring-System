@@ -31,5 +31,7 @@ class ClassificationIncident extends Model
     {
         return $this->hasMany(ClassificationIncident::class, 'classify_id', 'id');
     }
+
+    
     
 }

@@ -80,6 +80,36 @@
           </div>
           <!-- ./col -->
         
+          {{-- <table>
+            <thead>
+                <tr>
+                    <th width="10">
+
+                    </th>
+                    @foreach($columns as $column)
+                    <th>
+                     {{$column}}
+                    </th>
+                    @endforeach
+                </tr>
+            </thead>
+            <tbody>
+              @foreach($rows as $classify_id => $columns)
+                    <tr>
+                        <td>
+                          <strong>{{ $classify_id }}</strong>
+                        </td>
+                        @foreach($columns as $cat_id => $description)
+                        <td>
+                            {{ $description }}
+                        </td>
+                        @endforeach
+                    </tr>
+                @endforeach
+            </tbody>
+        </table> --}}
+
+      
 
     </div>
 </div>

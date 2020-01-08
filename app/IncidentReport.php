@@ -31,8 +31,10 @@ class IncidentReport extends Model implements HasMedia
         'team_id',
         'location',
         'no_laporan',
+        'status',
         'perbaikan',
         'pencegahan',
+        'description',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -45,6 +47,8 @@ class IncidentReport extends Model implements HasMedia
         'date_dept_action',
         'acknowledge_by_id',
         'dept_designated_id',
+        'cat_id',
+        'classify_id',
     ];
 
     public function nama_pelapor()
@@ -83,12 +87,22 @@ class IncidentReport extends Model implements HasMedia
 
     public function result()
     {
-        return $this->belongsTow(Result::class, 'result_id');
+        return $this->belongsTo(Result::class, 'result_id');
     }
 
     public function root_cause()
     {
         return $this->belongsTo(RootCause::class, 'root_cause_id');
+    }
+
+    public function classify_incident() 
+    {
+        return $this->belongsTo(ClassificationIncident::class, 'classify_id');
+    }
+
+    public function category_incident() 
+    {
+        return $this->belongsTo(CategoryIncident::class, 'cat_id');
     }
     public function getDateIncidentAttribute($value)
     {
@@ -173,4 +187,6 @@ class IncidentReport extends Model implements HasMedia
         return sprintf('%04d', intval($number) + 1);
             
     }
+
+   
 }

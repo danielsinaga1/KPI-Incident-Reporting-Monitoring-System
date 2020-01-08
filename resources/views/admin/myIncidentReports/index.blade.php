@@ -18,7 +18,7 @@
                     {{ trans('cruds.myIncidentReport.title_singular') }} {{ trans('global.list') }}
                 </div>
                 <div class="panel-body">
-                    <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-IncidentReport">
+                    <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-MyIncidentReport">
                         <thead>
                             <tr>
                                 <th width="10"></th>
@@ -40,6 +40,12 @@
                                     {{ trans('cruds.myIncidentReport.fields.location') }}
                                 </th>
                                 <th>
+                                    {{ trans('cruds.myIncidentReport.fields.category') }}
+                                </th>
+                                <th>
+                                    {{ trans('cruds.myIncidentReport.fields.classification') }}
+                                </th>
+                                <th>
                                     {{ trans('cruds.myIncidentReport.fields.photos') }}
                                 </th>
                                 <th>
@@ -56,6 +62,9 @@
                                 </th>
                                 <th>
                                     {{ trans('cruds.myIncidentReport.fields.result') }}
+                                </th>
+                                <th>
+                                    {{ trans('cruds.myIncidentReport.fields.status') }}
                                 </th>
                                 <th>
                                     {{ trans('cruds.myIncidentReport.fields.date_dept_action') }}
@@ -135,12 +144,15 @@
       { data: 'nama_pelapor_name', name: 'nama_pelapor.name' },
       { data: 'dept_origin_name'},
       { data: 'location', name: 'location' },
+      { data: 'category_incident_name', name: 'category_incident.name' },
+      { data: 'classify_incident_name', name: 'classify_incident.name' },
       { data: 'photos', name: 'photos', sortable: false, searchable: false },
       { data: 'date_incident', name: 'date_incident' },
       { data: 'root_cause_root_cause', name: 'root_cause.root_cause' },
       { data: 'perbaikan', name: 'perbaikan' },
       { data: 'pencegahan', name: 'pencegahan' },
       { data: 'result_name', name: 'result.name' },
+      { data: 'status', name: 'status' },
       { data: 'date_dept_action', name: 'date_dept_action' },
       { data: 'dept_designation_name', name: 'dept_designation.name' },
       { data: 'action_by_name', name: 'action_by.name' },
@@ -152,11 +164,30 @@
     pageLength: 100,
   };  
 
-  $('.datatable-IncidentReport').DataTable(dtOverrideGlobals);
+  $('.datatable-MyIncidentReport').DataTable(dtOverrideGlobals);
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
         $($.fn.dataTable.tables(true)).DataTable()
             .columns.adjust();
     });
+
+    $('.datatable-MyIncidentReport').on("click", "th.select-checkbox", function() {
+            if ($("th.select-checkbox").hasClass("selected")) {
+                datatable.rows().deselect();
+             $("th.select-checkbox").removeClass("selected");
+             } else {
+                datatable.rows().select();
+             $("th.select-checkbox").addClass("selected");
+            }
+        }).on("select deselect", function() {
+            ("Some selection or deselection going on")
+             if (datatable.rows({
+                  selected: true
+             }).count() !== datatable.rows().count()) {
+              $("th.select-checkbox").removeClass("selected");
+            } else {
+             $("th.select-checkbox").addClass("selected");
+         }
+});    
 });
 
 </script>

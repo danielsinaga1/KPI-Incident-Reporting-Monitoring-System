@@ -87,6 +87,50 @@
                             </p>
                             @endif
                         </div>
+                        <div class="form-group {{ $errors->has('cat_id') ? 'has-error' : '' }}">
+                            <label for="category">{{ trans('cruds.myIncidentReport.fields.category') }}*</label>
+                            <select name="cat_id" id="category" class="form-control select2" required>
+                                @foreach($category_incidents as $id => $category)
+                                <option value="{{ $id }}"
+                                    {{ (isset($incidentReport) && $incidentReport->category_incident ? $incidentReport->category_incident->id : old('cat_id')) == $id ? 'selected' : '' }}>
+                                    {{ $category }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('cat_id'))
+                            <p class="help-block">
+                                {{ $errors->first('cat_id') }}
+                            </p>
+                            @endif
+                        </div>
+                        <div class="form-group {{ $errors->has('classify_id') ? 'has-error' : '' }}">
+                            <label for="classification">{{ trans('cruds.myIncidentReport.fields.classification') }}*</label>
+                            <select name="classify_id" id="classification" class="form-control select2" required>
+                                @foreach($classification_incidents as $id => $classification)
+                                <option value="{{ $id }}"
+                                    {{ (isset($incidentReport) && $incidentReport->classify_incident ? $incidentReport->classify_incident->id : old('classify_id')) == $id ? 'selected' : '' }}>
+                                    {{ $classification }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('cat_id'))
+                            <p class="help-block">
+                                {{ $errors->first('cat_id') }}
+                            </p>
+                            @endif
+                        </div>
+                        <div class="form-group {{ $errors->has('description') ? 'has-error' : '' }}">
+                            <label for="description">{{ trans('cruds.myIncidentReport.fields.description') }}*</label>
+                            <input type="text" id="description" name="description" class="form-control"
+                                value="{{ old('description', isset($incidentReport) ? $incidentReport->description : '') }}"
+                                required>
+                            @if($errors->has('description'))
+                            <p class="help-block">
+                                {{ $errors->first('description') }}
+                            </p>
+                            @endif
+                            <p class="helper-block">
+                                {{ trans('cruds.myIncidentReport.fields.description_helper') }}
+                            </p>
+                        </div>
                         <div>
                             <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
                         </div>

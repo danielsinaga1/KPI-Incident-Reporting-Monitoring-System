@@ -10,6 +10,8 @@ use App\Http\Requests\UpdateMyIncidentReportRequest;
 use App\IncidentReport;
 use App\DesignationDepartment;
 use App\RootCause;
+use App\CategoryIncident;
+use App\ClassificationIncident;
 use Gate;
 use Carbon\Carbon;
 use DB;
@@ -24,9 +26,6 @@ class MyIncidentReportController extends Controller
     
     public function index(Request $request)
     {
-        // $incidentReport = new IncidentReport();
-        // $np_id = $incidentReport->nama_pelapor()->id;
-
         $authTeamId = auth()->user()->team_id;
         $query1 = DB::table('incident_reports')
         ->join('users', 'incident_reports.team_id' ,'=','users.team_id')
@@ -101,6 +100,14 @@ class MyIncidentReportController extends Controller
                     return $row->location ? $row->location : "";
                 });
 
+                $table->addColumn('category_incident_name', function ($row) {
+                    return $row->category_incident ? $row->category_incident->name : '';
+                  });
+    
+                  $table->addColumn('classify_incident_name', function ($row) {
+                    return $row->classify_incident ? $row->classify_incident->name : '';
+                  });
+
                 $table->editColumn('photos', function ($row) {
                     if (!$row->photos) {
                         return '';
@@ -143,8 +150,12 @@ class MyIncidentReportController extends Controller
                 $table->addColumn('result_name', function ($row) {
                     return $row->result ? $row->result->name : '';
                 });
+
+                $table->addColumn('status', function ($row) {
+                    return $row->status ? $row->status : "";
+                });
     
-                $table->rawColumns(['actions', 'placeholder', 'nama_pelapor', 'location', 'dept_origin', 'root_cause', 'photos', 'dept_designation', 'action_by', 'reviewed_by', 'acknowledge_by','result']);
+                $table->rawColumns(['actions', 'placeholder', 'nama_pelapor', 'location', 'dept_origin', 'root_cause', 'photos', 'dept_designation', 'action_by', 'reviewed_by', 'acknowledge_by','result','category_incident','classify_incident']);
                 return $table->make(true);
             }
         }
@@ -189,6 +200,14 @@ class MyIncidentReportController extends Controller
               $table->editColumn('location', function ($row) {
                   return $row->location ? $row->location : "";
               });
+              
+              $table->addColumn('category_incident_name', function ($row) {
+                return $row->category_incident ? $row->category_incident->name : '';
+              });
+
+              $table->addColumn('classify_incident_name', function ($row) {
+                return $row->classify_incident ? $row->classify_incident->name : '';
+              });
 
               $table->editColumn('photos', function ($row) {
                   if (!$row->photos) {
@@ -232,8 +251,11 @@ class MyIncidentReportController extends Controller
               $table->addColumn('result_name', function ($row) {
                   return $row->result ? $row->result->name : '';
               });
+              $table->addColumn('status', function ($row) {
+                return $row->status ? $row->status : "";
+            });
   
-              $table->rawColumns(['actions', 'placeholder', 'nama_pelapor', 'location', 'dept_origin', 'root_cause', 'photos', 'dept_designation', 'action_by', 'reviewed_by', 'acknowledge_by','result']);
+              $table->rawColumns(['actions', 'placeholder', 'nama_pelapor', 'location', 'dept_origin', 'root_cause', 'photos', 'dept_designation', 'action_by', 'reviewed_by', 'acknowledge_by','result','category_incident','classify_incident']);
               return $table->make(true);
           }
         }
@@ -284,6 +306,14 @@ class MyIncidentReportController extends Controller
                     return $row->location ? $row->location : "";
                 });
 
+                $table->addColumn('category_incident_name', function ($row) {
+                    return $row->category_incident ? $row->category_incident->name : '';
+                  });
+    
+                  $table->addColumn('classify_incident_name', function ($row) {
+                    return $row->classify_incident ? $row->classify_incident->name : '';
+                  });
+
                 $table->editColumn('photos', function ($row) {
                     if (!$row->photos) {
                         return '';
@@ -326,8 +356,11 @@ class MyIncidentReportController extends Controller
                 $table->addColumn('result_name', function ($row) {
                     return $row->result ? $row->result->name : '';
                 });
-    
-                $table->rawColumns(['actions', 'placeholder', 'nama_pelapor', 'location', 'dept_origin', 'root_cause', 'photos', 'dept_designation', 'action_by', 'reviewed_by', 'acknowledge_by','result']);
+
+                $table->addColumn('status', function ($row) {
+                    return $row->status ? $row->status : "";
+                });
+                $table->rawColumns(['actions', 'placeholder', 'nama_pelapor', 'location', 'dept_origin', 'root_cause', 'photos', 'dept_designation', 'action_by', 'reviewed_by', 'acknowledge_by','result','category_incident','classify_incident']);
                 return $table->make(true);
                 
             }
@@ -341,8 +374,10 @@ class MyIncidentReportController extends Controller
         
         $dept_designations = DesignationDepartment::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
         $root_causes = RootCause::all()->pluck('root_cause', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $category_incidents = CategoryIncident::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $classification_incidents = ClassificationIncident::all()->pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
         
-        return view('admin.myIncidentReports.create', compact('root_causes','dept_designations'));
+        return view('admin.myIncidentReports.create', compact('root_causes','dept_designations','category_incidents','classification_incidents'));
     }
 
     public function store(StoreIncidentReportRequest $request)
@@ -356,7 +391,7 @@ class MyIncidentReportController extends Controller
         $data['nama_pelapor_id'] = auth()->id();   
         $data['team_id'] = Auth::user()->team_id;
         $data['result_id'] = 3;
-      
+        $data['status'] = 'Open';
         $data['no_laporan'] = $nextNumberReport;
         $incidentReport = IncidentReport::create($data);
       

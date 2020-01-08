@@ -62,6 +62,7 @@ return [
         'colvis'        => 'Column visibility',
         'delete'        => 'Delete selected',
         'zero_selected' => 'No rows selected',
+        'selectAll'     => 'Select All',
     ],
     'action'                               => 'Action',
     'action_id'                            => 'Action id',
