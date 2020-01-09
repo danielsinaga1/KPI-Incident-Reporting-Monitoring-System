@@ -3,6 +3,7 @@
 namespace App;
 
 // use App\Traits\MultiTenantModelTrait;
+use App\Traits\Auditable;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,7 +13,7 @@ use Spatie\MediaLibrary\Models\Media;
 
 class IncidentReport extends Model implements HasMedia
 {
-    use SoftDeletes, HasMediaTrait;
+    use SoftDeletes, HasMediaTrait, Auditable;
 
     public $table = 'incident_reports';
     

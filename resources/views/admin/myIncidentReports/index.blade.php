@@ -151,8 +151,28 @@
       { data: 'root_cause_root_cause', name: 'root_cause.root_cause' },
       { data: 'perbaikan', name: 'perbaikan' },
       { data: 'pencegahan', name: 'pencegahan' },
-      { data: 'result_name', name: 'result.name' },
-      { data: 'status', name: 'status' },
+      { data: 'result_name', 
+        name: 'result.name',
+            render : function(data, type, row) {
+               if(row.result_name === 'Approved')
+               return '<span class= "label label-success">'+data+'</span>'
+                else if (row.result_name === 'Rejected')
+                return '<span class= "label label-danger">'+data+'</span>'
+                else if (row.result_name === 'Pending')
+                return '<span class= "label label-warning">'+data+'</span>'
+        }
+      },
+      { data: 'status', 
+        name: 'status' ,
+        render : function (data, type, row) {
+
+            if(row.status === 'Open')
+            return '<span class= "label label-success">'+data+'</span>'
+            else(row.status === 'Close') 
+            return '<span class= "label label-danger">'+data+'</span>'
+        }
+      
+      },
       { data: 'date_dept_action', name: 'date_dept_action' },
       { data: 'dept_designation_name', name: 'dept_designation.name' },
       { data: 'action_by_name', name: 'action_by.name' },

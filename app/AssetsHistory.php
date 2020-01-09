@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 
 class AssetsHistory extends Model

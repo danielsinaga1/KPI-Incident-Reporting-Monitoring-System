@@ -110,4 +110,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('changePassword','ProfileController@changePassword2')->name('changePassword');
     Route::post('updatePassword','ProfileController@updatePassword')->name('updatePassword');
 
+    // Audit Logs
+    Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 });

@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
+use App\Traits\Auditable;
 
 class Asset extends Model implements HasMedia
 {
-    use SoftDeletes, HasMediaTrait;
+    use SoftDeletes, HasMediaTrait, Auditable;
 
     public $table = 'assets';
 

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\Auditable;
 use App\CategoryIncident;
 use App\Traits\MultiTenantModelTrait;
 use Illuminate\Database\Eloquent\Model;

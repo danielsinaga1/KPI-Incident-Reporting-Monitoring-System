@@ -63,6 +63,18 @@ return [
         'delete'        => 'Hapus terpilih',
         'zero_selected' => 'Tidak ada baris yang dipilih',
     ],
+    'auditLog'          =>  [
+        'fields'        => [
+            'id'             => 'ID',
+            'description'    => 'Description',
+            'subject_id'     => 'Subject ID',
+            'subject_type'   => 'Subject Type',
+            'user_id'        => 'User ID',
+            'host'           => 'Host',
+            'created_at'     => 'Created at',
+        ],
+       
+    ],
     'action'                               => 'Aksi',
     'action_id'                            => 'Id Aksi',
     'action_model'                         => 'Model Aksi',

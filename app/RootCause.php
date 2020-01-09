@@ -2,12 +2,13 @@
 
 namespace App;
 
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RootCause extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Auditable;
 
     public $table = 'root_causes';
 
