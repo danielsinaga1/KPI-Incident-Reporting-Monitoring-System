@@ -19,11 +19,11 @@
                 </div>
                 <div class="panel-body">
 
-                    <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-IncidentReport">
+                    <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-TaskIncidentReport">
                         <thead>
                             <tr>
                                 <th width="10">
-
+                                    
                                 </th>
                                 <th>
                                     {{ trans('cruds.taskIncidentReport.fields.id') }}
@@ -152,12 +152,13 @@
     pageLength: 100,
   };  
 
-  $('.datatable-IncidentReport').DataTable(dtOverrideGlobals);
+  $('.datatable-TaskIncidentReport').DataTable(dtOverrideGlobals);
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
         $($.fn.dataTable.tables(true)).DataTable()
             .columns.adjust();
     });
 });
+
 
 </script>
 @endsection

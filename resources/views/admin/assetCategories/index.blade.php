@@ -13,6 +13,26 @@
     <div class="row">
         <div class="col-lg-12">
 
+            @if(Session::has('success'))
+            {{-- <script type="text/javascript">
+               swal({
+                   title:'Success!',
+                   text:"{{Session::get('success')}}",
+                   timer:10000,
+                   type:'success',
+                   icon: 'success'
+               }).then((value) => {
+                 //location.reload();
+               }).catch(swal.noop);
+           </script> --}}
+           @endif
+
+            {{-- @if ($message = Session::get('sukses'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert"    >×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif  ini berhasil--}}
             <div class="panel panel-default">
                 <div class="panel-heading">
                     {{ trans('cruds.assetCategory.title_singular') }} {{ trans('global.list') }}

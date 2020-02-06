@@ -9,6 +9,7 @@ use App\Http\Requests\StoreAssetCategoryRequest;
 use App\Http\Requests\UpdateAssetCategoryRequest;
 use Gate;
 use Alert;
+use Session;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -33,6 +34,8 @@ class AssetCategoryController extends Controller
     public function store(StoreAssetCategoryRequest $request)
     {
         $assetCategory = AssetCategory::create($request->all());
+        alert()->success('Data has been added', 'Successfully');
+        // Session::flash('sukses','Ini notifikasi SUKSES');  Ini berhasil
 
         return redirect()->route('admin.asset-categories.index');
         
@@ -64,14 +67,15 @@ class AssetCategoryController extends Controller
         abort_if(Gate::denies('asset_category_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $assetCategory->delete();
-
+        alert()->success('Data has been deleted', 'Successfully');
         return back();
     }
 
     public function massDestroy(MassDestroyAssetCategoryRequest $request)
     {
+        
         AssetCategory::whereIn('id', request('ids'))->delete();
-
+        alert()->success('Data has been deleted', 'Successfully');
         return response(null, Response::HTTP_NO_CONTENT);
     }
 }

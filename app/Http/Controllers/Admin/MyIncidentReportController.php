@@ -38,7 +38,37 @@ class MyIncidentReportController extends Controller
         ->whereNotNull('acknowledge_by_id')
         ->select('incident_reports.*')->get();
 
+        $now = Carbon::now();
 
+        $from = DB::table('incident_reports')->
+                where('id','1')->select('created_at')->get();
+
+        $to = Carbon::createFromFormat('Y-m-d H:i:s',$now);
+
+        $date1 = strtotime($from);  
+        $date2 = strtotime($now);  
+        $diff = abs($date2 - $date1);  
+        // To get the year divide the resultant date into 
+        // total seconds in a year (365*60*60*24) 
+        $years = floor($diff / (365*60*60*24));  
+          
+        // To get the month, subtract it with years and 
+        // divide the resultant date into 
+        // total seconds in a month (30*60*60*24) 
+        $months = floor(($diff - $years * 365*60*60*24) 
+        / (30*60*60*24));  
+        // Formulate the Difference between two dates 
+
+        $days = floor(($diff - $years * 365*60*60*24 -  
+             $months*30*60*60*24)/ (60*60*24)); 
+        
+
+        dd($days);
+
+
+        if($days > 3){
+         echo('Sudah lebih woi');
+        }
         $query1 = DB::table('incident_reports')
         ->join('users', 'incident_reports.team_id' ,'=','users.team_id')
         ->where('users.team_id','=',$authTeamId)->select('incident_reports.*')->get();
@@ -360,7 +390,7 @@ class MyIncidentReportController extends Controller
                 $table->addColumn('status', function ($row) {
                     return $row->status ? $row->status : "";
                 });
-                $table->rawColumns(['actions', 'placeholder', 'nama_pelapor', 'location', 'dept_origin', 'root_cause', 'photos', 'dept_designation', 'action_by', 'reviewed_by', 'acknowledge_by','result','category_incident','classify_incident']);
+                $table->rawColumns(['actions', 'placeholder','nama_pelapor', 'location', 'dept_origin', 'root_cause', 'photos', 'dept_designation', 'action_by', 'reviewed_by', 'acknowledge_by','result','category_incident','classify_incident']);
                 return $table->make(true);
                 
             }

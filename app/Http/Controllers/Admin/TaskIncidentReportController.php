@@ -286,6 +286,7 @@ class TaskIncidentReportController extends Controller
     public function actionByuser(IncidentReport $incidentReport) {
 
         $incidentReport->action_by_id = auth()->user()->id;
+        $incidentReport->status = "Close";
         $incidentReport->update();
         // $incidentReport->update(['result_id' => 1,
         // 'reviewed_by_id' => auth()->user()->id

@@ -20,7 +20,7 @@
                 <div class="panel-body">
 
                     <div class="table-responsive">
-                        <table class=" table table-bordered table-striped table-hover datatable datatable-Result">
+                        <table class=" table table-bordered table-striped table-hover datatable datatable-Result" id="example">
                             <thead>
                                 <tr>
                                     <th width="10">
@@ -131,6 +131,25 @@
             .columns.adjust();
     });
 })
+
+('#example').DataTable().on("click", "th.select-checkbox", function() {
+  if ($("th.select-checkbox").hasClass("selected")) {
+    ('#example').DataTable().rows().deselect();
+    $("th.select-checkbox").removeClass("selected");
+  } else {
+    ('#example').DataTable().rows().select();
+    $("th.select-checkbox").addClass("selected");
+  }
+}).on("select deselect", function() {
+  ("Some selection or deselection going on")
+  if (('#example').DataTable().rows({
+      selected: true
+    }).count() !== ('#example').DataTable().rows().count()) {
+    $("th.select-checkbox").removeClass("selected");
+  } else {
+    $("th.select-checkbox").addClass("selected");
+  }
+});
 
 </script>
 @endsection

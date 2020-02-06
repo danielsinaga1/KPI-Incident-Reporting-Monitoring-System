@@ -18,14 +18,13 @@
                     {{ trans('cruds.myIncidentReport.title_singular') }} {{ trans('global.list') }}
                 </div>
                 <div class="panel-body">
-                    <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-MyIncidentReport">
+                    <table class=" table table-bordered table-striped table-hover ajaxTable datatable datatable-MyIncidentReport" id="example">
                         <thead>
                             <tr>
-                                <th width="10"></th>
-                                <th>
-                                    {{ trans('cruds.myIncidentReport.fields.id') }}
+                                <th width="10">
+
                                 </th>
-                                
+
                                 <th>
                                     {{ trans('cruds.myIncidentReport.fields.no_laporan') }}
                                 </th>
@@ -139,7 +138,6 @@
     ajax: "{{ route('admin.my-incident-reports.index') }}",
     columns: [
       { data: 'placeholder', name: 'placeholder' },
-      { data: 'id', name: 'id' },
       { data: 'no_laporan', name: 'no_laporan' },
       { data: 'nama_pelapor_name', name: 'nama_pelapor.name' },
       { data: 'dept_origin_name'},
@@ -154,11 +152,11 @@
       { data: 'result_name', 
         name: 'result.name',
             render : function(data, type, row) {
-               if(row.result_name === 'Approved')
+               if(row.result_name === 'Approved Partially')
                return '<span class= "label label-success">'+data+'</span>'
-                else if (row.result_name === 'Rejected')
+                else if (row.result_name === 'Approved Fully')
                 return '<span class= "label label-danger">'+data+'</span>'
-                else if (row.result_name === 'Pending')
+                else if (row.result_name === 'Rejected')
                 return '<span class= "label label-warning">'+data+'</span>'
         }
       },
@@ -184,30 +182,12 @@
     pageLength: 100,
   };  
 
-  $('.datatable-MyIncidentReport').DataTable(dtOverrideGlobals);
+    $('.datatable-MyIncidentReport').DataTable(dtOverrideGlobals);
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
         $($.fn.dataTable.tables(true)).DataTable()
             .columns.adjust();
     });
-
-    $('.datatable-MyIncidentReport').on("click", "th.select-checkbox", function() {
-            if ($("th.select-checkbox").hasClass("selected")) {
-                datatable.rows().deselect();
-             $("th.select-checkbox").removeClass("selected");
-             } else {
-                datatable.rows().select();
-             $("th.select-checkbox").addClass("selected");
-            }
-        }).on("select deselect", function() {
-            ("Some selection or deselection going on")
-             if (datatable.rows({
-                  selected: true
-             }).count() !== datatable.rows().count()) {
-              $("th.select-checkbox").removeClass("selected");
-            } else {
-             $("th.select-checkbox").addClass("selected");
-         }
-});    
+   
 });
 
 </script>

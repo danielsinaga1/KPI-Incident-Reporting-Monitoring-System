@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ trans('panel.site_title_header') }}</title>
+    <link rel="icon" href="img/logo_kpi.png" type="image/ico">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
         rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet" />
@@ -24,12 +25,17 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
         rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.0.1/sweetalert.css">
+
+
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/ionicons.css') }}" rel="stylesheet" />
+
     @yield('styles')
 </head>
 
 <body class="sidebar-mini skin-purple" style="height: auto; min-height: 100%;">
+    
     <div class="wrapper" style="height: auto; min-height: 100%;">
         <header class="main-header">
             <a href="#" class="logo">
@@ -292,7 +298,7 @@
                                         <a href="{{route('admin.profiles.index')}}" class="btn btn-default btn-flat">Profile</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">  {{ trans('global.logout') }}</a>
+                                        <a class="btn btn-default btn-flat btn-logout" id="tombol">  {{ trans('global.logout') }}</a>
                                     </div>
                                 </li>
                             </ul>
@@ -375,6 +381,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.0.1/sweetalert.min.js"></script>
+@include('sweet::alert')
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script>
@@ -404,13 +412,7 @@ $(function () {
                 columnDefs: [{
                     orderable: false,
                     className: 'select-checkbox',
-
                     targets: 0
-                }, {
-                    className: 'selectAll',
-                    orderable: false,
-                    searchable: false,
-                    targets: -1
                 }],
                 select: {
                     style: 'multi+shift',
@@ -427,6 +429,14 @@ $(function () {
                         extend: 'selectAll',
                         className:'btn-primary',
                         text: selectAllButtonTrans,
+                        exportOptions: {
+                            columns: 'visible'
+                        }
+                    },
+                    {
+                        extend: 'selectNone',
+                        className:'btn-sm',
+                        text: "Un-Select All Rows",
                         exportOptions: {
                             columns: 'visible'
                         }
@@ -485,6 +495,31 @@ $(function () {
             $.fn.dataTable.ext.classes.sPageButton = '';
 
         });
+
+$('#tombol').on('click', function() {
+    swal({
+    title: 'Do you want to logout?',
+    type: 'info',
+    buttons: {
+            cancel: true,
+            confirm: "OK"
+     },
+    showCancelButton: true,
+    confirmButtonClass: 'btn-danger',
+    allowOutsideClick: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#DD6855',
+    confirmButtonText: 'Ya',
+    closeOnConfirm: false,
+    closeOnCancel: true
+   }).then((value) => { 
+      if (value===true) { 
+         $('#logoutform').submit() // this submits the form 
+      }
+
+    }) 
+});
+
     </script>
     @yield('scripts')
 </body>

@@ -244,14 +244,14 @@
                     </ul>
                 </li>
             @endcan
-            {{-- <li>
+            <li>
                 <a href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                     <i class="fas fa-fw fa-sign-out-alt">
 
                     </i>
                     {{ trans('global.logout') }}
                 </a>
-            </li> --}}
+            </li>
         </ul>
     </section>
 </aside>
